@@ -1,5 +1,5 @@
 # TechMart
-data stucture and algorithim assignment
+Algorithms and Data Structures Assignment
 
 # Step 1
 flow chart
