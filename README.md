@@ -2,7 +2,9 @@
 Algorithms and Data Structures Assignment
 
 # Step 1
-flow chart
+Flow Chart
 
 # Step 2
 TechMart
+
+
