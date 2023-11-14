@@ -27,7 +27,7 @@ void signup(){
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
     cout<<"\tSIGNUP"<<endl<<endl;
-    cout<<"User ID : ";
+    cout<<"User ID : Hello World";
     cin>> id[i];
     cout<<"Password : ";
     cin>> pw[i];
