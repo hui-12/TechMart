@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <limits>
+
+using namespace std;
+
+main(){
+    string username;
+    int password, password2;
+
+    cout << "Insert username: ";
+    getline(cin,username);
+
+    cout << "Insert password: ";
+    cin >> password;
+
+    cout << "Confirmation password: ";
+    cin >> password2;
+
+    if (password == password2){
+        ofstream myFile("Account.txt");     //create a textfile
+        myFile << "Username: " << username << endl << "Password: " << password;     //save items into the txt file
+        myFile.close();     //close txt file while finished saving
+        
+        cout << "\nRegistered Successfully!" << endl;
+        cout << "Username: " << username << endl << "Password: " << password;
+    } 
+    else {
+        cout << "Please try again." << endl;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        main();
+    }
+}
