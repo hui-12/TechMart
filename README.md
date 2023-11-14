@@ -15,3 +15,7 @@
 
 ## DFD
 (https://drive.google.com/file/d/1DM_3dbgGomNd7IDvMNzAjpAOd73B5bQX/view?usp=sharing)
+
+## List
+([https://drive.google.com/file/d/1DM_3dbgGomNd7IDvMNzAjpAOd73B5bQX/view?usp=sharing](https://neweracollege365-my.sharepoint.com/:x:/g/personal/mathewlau0325_e_newera_edu_my/EdurJChMEphCkqX3GwltCW0BfHQJ4wwof_GGplgUNRNR2g?e=TOv4dm)https://neweracollege365-my.sharepoint.com/:x:/g/personal/mathewlau0325_e_newera_edu_my/EdurJChMEphCkqX3GwltCW0BfHQJ4wwof_GGplgUNRNR2g?e=TOv4dm)
+
