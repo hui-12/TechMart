@@ -12,20 +12,20 @@ int main (int argc, char** argv){
 
 //PRODUCT DATABASE
     "CREATE TABLE PRODUCTS ("
-    "PRODUCT_ID        INT         PRIMARY KEY     NOT NULL,"
+    "PRODUCT_ID        INT         PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
     "PRODUCT_NAME      TEXT                                ,"
     "CATEGORY_ID       ID                                  ,"
     "DESCRIPTION       TEXT                                ,"
-    "PRICE             INT                                 ,"
-    "QUANTITY_IN_STOCK INT                                 ,"
+    "PRODUCT_PRICE     INT                                 ,"
+    "TOTAL_QUANTITY    INT                                 ,"
     "SUPPLIER_ID       INT                                );"
 
     "CREATE TABLE CATEGORIES ("
-    "CATEGORY_ID     INT         PRIMARY KEY     NOT NULL,"
+    "CATEGORY_ID     INT         PRIMARY KEY     NOT NULL       AUTOINCREMENT,"
     "CATEGORY_NAME   TEXT                               );"
 
     "CREATE TABLE SUPPLIER_PROFILE ("
-    "SUPPLIER_ID        INT         PRIMARY KEY     NOT NULL,"
+    "SUPPLIER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
     "COMPANY_NAME       TEXT                                ,"
     "EMAIL              TEXT                                ,"
     "PHONE              TEXT                                ,"
@@ -34,7 +34,7 @@ int main (int argc, char** argv){
 
 //INVENTORY MANAGEMENT
     "CREATE TABLE INVENTORIES ("
-    "PRODUCT_ID             INT         PRIMARY KEY     NOT NULL,"
+    "PRODUCT_ID             INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
     "PRODUCT_NAME           TEXT                                ,"
     "QUANTITY_AVAILABLE     INT                                 ,"
     "UNIT_PRICE             INT                                 ,"
@@ -43,7 +43,7 @@ int main (int argc, char** argv){
 
 //CUSTOMER DATABASE
     "CREATE TABLE CUSTOMER_PROFILE ("
-    "CUSTOMER_ID        INT         PRIMARY KEY     NOT NULL,"
+    "CUSTOMER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
     "FULL_NAME          TEXT                                ,"      //REAL NAME
     "EMAIL              TEXT                                ,"
     "PHONE_NUMBER       TEXT                                ,"
@@ -53,7 +53,7 @@ int main (int argc, char** argv){
     "PURCHASE_HISTORY   TEXT                               );"
 
     "CREATE TABLE CUSTOMER_ORDER ("
-    "ORDER_ID        INT         PRIMARY KEY     NOT NULL,"
+    "ORDER_ID        INT         PRIMARY KEY     NOT NULL       AUTOINCREMENT,"
     "CUSTOMER_ID     INT                                 ,"
     "PRODUCT_ID      INT                                 ,"
     "PRODUCT_NAME    TEXT                                ,"
@@ -63,19 +63,22 @@ int main (int argc, char** argv){
 
 //OTHERS
     "CREATE TABLE LOGIN_USER ("
-    "USER_ID        INT         PRIMARY KEY     NOT NULL,"
+    "USER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
     "USER_NAME      TEXT                                ,"
     "PASSWORD       TEXT                                ,"
     "EMAIL          TEXT                               );"
 
-    "CREATE TABLE LOGIN_ADMIN ("
-    "USER_ID        INT         PRIMARY KEY     NOT NULL,"
-    "USER_NAME      TEXT                                ,"
-    "PASSWORD       TEXT                                ,"
-    "EMAIL          TEXT                               );"
+    "CREATE TABLE ADDRESS ("
+    "ADDRESS_ID         INT         PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
+    "USER_ID            TEXT                                ,"
+    "SUPPLIER_ID        TEXT                                ,"
+    "CITY               TEXT                                ,"
+    "STATE              TEXT                                ,"
+    "POSTCODE           TEXT                                ,"
+    "COUNTRY            TEXT                               );"
 
     "CREATE TABLE SHOP_INFORMATION ("
-    "SHOP_ID            INT         PRIMARY KEY     NOT NULL,"
+    "SHOP_ID            INT         PRIMARY KEY     NOT NULL    AUTOINCREMENT,"
     "SHOP_NAME          TEXT                                ,"
     "ADDRESS_ID         TEXT                                ,"
     "PRODUCT_ID         INT                                 ,"
@@ -85,7 +88,7 @@ int main (int argc, char** argv){
     "STATUS             TEXT                               );"
 
     "CREATE TABLE REPORT ("
-    "REPORT_ID          INT         PRIMARY KEY     NOT NULL,"
+    "REPORT_ID          INT         PRIMARY KEY     NOT NULL    AUTOINCREMENT,"
     "REPORT_DATE        TEXT                                ,"
     "REPORT_CONTENT     TEXT                                ,"
     "REPORT_STATUS      TEXT                               ),";
