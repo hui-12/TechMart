@@ -79,7 +79,14 @@ int main (int argc, char** argv){
     "CREW_ID        INTEGER     PRIMARY KEY    AUTOINCREMENT,"
     "SHOP_ID        INT     ,"
     "CREW_NAME      TEXT    NOT NULL,"
-    "POSITION       TEXT    NOT NULL);";
+    "POSITION       TEXT    NOT NULL);"
+    
+    
+    "CREATE TABLE REPORT ("
+    "REPORT_ID          INTEGER     PRIMARY KEY    AUTOINCREMENT,"
+    "REPORT_DATE        TEXT                                ,"
+    "REPORT_CONTENT     TEXT                                ,"
+    "REPORT_STATUS      TEXT                               );";
 
 
     exit = sqlite3_open("TechMart.db", &DB);
