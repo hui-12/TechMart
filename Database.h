@@ -11,9 +11,9 @@ int main (int argc, char** argv){
     string sql = 
 
     "CREATE TABLE PRODUCTS ("
-    "PRODUCT_ID        INT          PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
-    "CATEGORY_ID       INT          FOREIGN KEY REFERENCES CATEGORIES(CATEGORIES_ID),"
-    "SHOP_ID           TEXT         FOREIGN KEY REFERENCES SHOP(SHOP_ID),"
+    "PRODUCT_ID        INTEGER          PRIMARY KEY     AUTOINCREMENT,"
+    "CATEGORY_ID       INT          ,"
+    "SHOP_ID           INT          ,"
     "PRODUCT_NAME      TEXT         NOT NULL,"
     "PRODUCT_PRICE     INT          NOT NULL,"
     "TOTAL_SALES       TEXT         ,"
@@ -21,48 +21,47 @@ int main (int argc, char** argv){
 
 
     "CREATE TABLE CATEGORIES ("
-    "CATEGORY_ID     INT         PRIMARY KEY     NOT NULL       AUTOINCREMENT,"
+    "CATEGORY_ID     INTEGER     PRIMARY KEY    AUTOINCREMENT,"
     "CATEGORY_NAME   TEXT        );"
 
 
     "CREATE TABLE SUPPLIER ("
-    "SUPPLIER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
-    "EMAIL_ID           INT         FOREIGN KEY REFERENCES EMAIL(EMAIL_ID),"
-    "ADDRESS_ID         INT         FOREIGN KEY REFERENCES ADDRESS(ADDRESS_ID),"
+    "SUPPLIER_ID        INTEGER         PRIMARY KEY        AUTOINCREMENT,"
+    "EMAIL_ID           INT         ,"
+    "ADDRESS_ID         INT         ,"
     "COMPANY_NAME       TEXT        NOT NULL,"
     "PHONE              TEXT        NOT NULL);"
 
 
-
     "CREATE TABLE SHOP ("
-    "SHOP_ID                    INT     PRIMARY KEY     NOT NULL    AUTOINCREMENT,"
-    "ADDRESS_ID                 INT     FOREIGN KEY REFERENCES ADDRESS(ADDRESS_ID),"
-    "PRODUCT_ID                 INT     FOREIGN KEY REFERENCES PRODUCT(PRODUCT_ID),"
+    "SHOP_ID                    INTEGER     PRIMARY KEY    AUTOINCREMENT,"
+    "ADDRESS_ID                 INT     ,"
+    "PRODUCT_ID                 INT     ,"
     "SHOP_NAME                  TEXT    NOT NULL,"
     "SHOP_PRODUCT_QUANTITY      INT     NOT NULL,"
     "SALES                      INT     NOT NULL);"
 
 
-    "CREATE TABLE RECORD (" //CUSTOMER ORDER
-    "RECORD_ID          INT     PRIMARY KEY    NOT NULL     AUTOINCREMENT,"
-    "PRODUCT_ID         INT     FOREIGN KEY REFERENCES PRODUCT(PRODUCT_ID),"
-    "USER_ID            INT     FOREIGN KEY REFERENCES USER(USER_ID),"
+    "CREATE TABLE RECORD ("
+    "RECORD_ID          INTEGER     PRIMARY KEY     AUTOINCREMENT,"
+    "PRODUCT_ID         INT     ,"
+    "USER_ID            INT     ,"
     "TOTAL_PRICE        INT     NOT NULL,"
     "PAYMENT_METHOD     TEXT    NOT NULL);"
 
 
     "CREATE TABLE USER ("
-    "USER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
-    "ADDRESS_ID     INT         FOREIGN KEY REFERENCES ADDRESS(ADDRESS_ID),"
-    "EMAIL_ID       INT         FOREIGN KEY REFERENCES EMAIL(EMAIL_ID),"
+    "USER_ID        INTEGER         PRIMARY KEY        AUTOINCREMENT,"
+    "ADDRESS_ID     INT         ,"
+    "EMAIL_ID       INT         ,"
     "USER_NAME      TEXT        NOT NULL,"
     "USER_PW        TEXT        NOT NULL);"
 
 
     "CREATE TABLE ADDRESS ("
-    "ADDRESS_ID         INT     PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
-    "USER_ID            INT     FOREIGN KEY REFERENCES USER(USER_ID),"
-    "SUPPLIER_ID        INT     FOREIGN KEY REFERENCES SUPPLIER(SUPPLIER_ID),"
+    "ADDRESS_ID         INTEGER     PRIMARY KEY     AUTOINCREMENT,"
+    "USER_ID            INT     ,"
+    "SUPPLIER_ID        INT     ,"
     "CITY               TEXT    NOT NULL,"
     "STATE              TEXT    NOT NULL,"
     "POSTCODE           TEXT    NOT NULL,"
@@ -70,17 +69,17 @@ int main (int argc, char** argv){
 
 
     "CREATE TABLE EMAIL ("
-    "EMAIL_ID       INT     PRIMARY KEY     AUTOINCREMENT,"
-    "USER_ID        INT     FOREIGN KEY REFERENCES USER(USER_ID),"
-    "SUPPLIER_ID    INT     FOREIGN KEY REFERENCES SUPPLIER(SUPPLIER_ID),"
+    "EMAIL_ID       INTEGER     PRIMARY KEY    AUTOINCREMENT,"
+    "USER_ID        INT     ,"
+    "SUPPLIER_ID    INT     ,"
     "EMAIL          TEXT    NOT NULL);"
 
 
     "CREATE TABLE CREW ("
-    "CREW_ID        INT     PRIMARY KEY     AUTO INCREMENT,"
-    "SHOP_ID        INT     FOREIGN KEY REFERENCES SHOP(SHOP_ID),"
+    "CREW_ID        INTEGER     PRIMARY KEY    AUTOINCREMENT,"
+    "SHOP_ID        INT     ,"
     "CREW_NAME      TEXT    NOT NULL,"
-    "POSITION       TEXT    NOT NULL);"
+    "POSITION       TEXT    NOT NULL);";
 
 
     exit = sqlite3_open("TechMart.db", &DB);
