@@ -11,7 +11,7 @@ int main (int argc, char** argv){
     string sql = 
 
     "CREATE TABLE PRODUCTS ("
-    "PRODUCT_ID        INTEGER          PRIMARY KEY     AUTOINCREMENT,"
+    "PRODUCT_ID        INTEGER      PRIMARY KEY     AUTOINCREMENT,"
     "CATEGORY_ID       INT          ,"
     "SHOP_ID           INT          ,"
     "PRODUCT_NAME      TEXT         NOT NULL,"
@@ -26,7 +26,7 @@ int main (int argc, char** argv){
 
 
     "CREATE TABLE SUPPLIER ("
-    "SUPPLIER_ID        INTEGER         PRIMARY KEY        AUTOINCREMENT,"
+    "SUPPLIER_ID        INTEGER     PRIMARY KEY        AUTOINCREMENT,"
     "EMAIL_ID           INT         ,"
     "ADDRESS_ID         INT         ,"
     "COMPANY_NAME       TEXT        NOT NULL,"
@@ -35,50 +35,50 @@ int main (int argc, char** argv){
 
     "CREATE TABLE SHOP ("
     "SHOP_ID                    INTEGER     PRIMARY KEY    AUTOINCREMENT,"
-    "ADDRESS_ID                 INT     ,"
-    "PRODUCT_ID                 INT     ,"
-    "SHOP_NAME                  TEXT    NOT NULL,"
-    "SHOP_PRODUCT_QUANTITY      INT     NOT NULL,"
-    "SALES                      INT     NOT NULL);"
+    "ADDRESS_ID                 INT         ,"
+    "PRODUCT_ID                 INT         ,"
+    "SHOP_NAME                  TEXT        NOT NULL,"
+    "SHOP_PRODUCT_QUANTITY      INT         NOT NULL,"
+    "SALES                      INT         NOT NULL);"
 
 
     "CREATE TABLE RECORD ("
     "RECORD_ID          INTEGER     PRIMARY KEY     AUTOINCREMENT,"
-    "PRODUCT_ID         INT     ,"
-    "USER_ID            INT     ,"
-    "TOTAL_PRICE        INT     NOT NULL,"
-    "PAYMENT_METHOD     TEXT    NOT NULL);"
+    "PRODUCT_ID         INT         ,"
+    "USER_ID            INT         ,"
+    "TOTAL_PRICE        INT         NOT NULL,"
+    "PAYMENT_METHOD     TEXT        NOT NULL);"
 
 
     "CREATE TABLE USER ("
     "USER_ID        INTEGER         PRIMARY KEY        AUTOINCREMENT,"
-    "ADDRESS_ID     INT         ,"
-    "EMAIL_ID       INT         ,"
-    "USER_NAME      TEXT        NOT NULL,"
-    "USER_PW        TEXT        NOT NULL);"
+    "ADDRESS_ID     INT             ,"
+    "EMAIL_ID       INT             ,"
+    "USER_NAME      TEXT            NOT NULL,"
+    "USER_PW        TEXT            NOT NULL);"
 
 
     "CREATE TABLE ADDRESS ("
     "ADDRESS_ID         INTEGER     PRIMARY KEY     AUTOINCREMENT,"
-    "USER_ID            INT     ,"
-    "SUPPLIER_ID        INT     ,"
-    "CITY               TEXT    NOT NULL,"
-    "STATE              TEXT    NOT NULL,"
-    "COUNTRY            TEXT    NOT NULL);"
+    "USER_ID            INT         ,"
+    "SUPPLIER_ID        INT         ,"
+    "CITY               TEXT        NOT NULL,"
+    "STATE              TEXT        NOT NULL,"
+    "COUNTRY            TEXT        NOT NULL);"
 
 
     "CREATE TABLE EMAIL ("
     "EMAIL_ID       INTEGER     PRIMARY KEY    AUTOINCREMENT,"
-    "USER_ID        INT     ,"
-    "SUPPLIER_ID    INT     ,"
-    "EMAIL          TEXT    NOT NULL);"
+    "USER_ID        INT         ,"
+    "SUPPLIER_ID    INT         ,"
+    "EMAIL          TEXT        NOT NULL);"
 
 
     "CREATE TABLE CREW ("
     "CREW_ID        INTEGER     PRIMARY KEY    AUTOINCREMENT,"
-    "SHOP_ID        INT     ,"
-    "CREW_NAME      TEXT    NOT NULL,"
-    "POSITION       TEXT    NOT NULL);"
+    "SHOP_ID        INT         ,"
+    "CREW_NAME      TEXT        NOT NULL,"
+    "POSITION       TEXT        NOT NULL);"
     
 
     "CREATE TABLE REPORT ("
