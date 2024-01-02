@@ -64,7 +64,6 @@ int main (int argc, char** argv){
     "SUPPLIER_ID        INT     ,"
     "CITY               TEXT    NOT NULL,"
     "STATE              TEXT    NOT NULL,"
-    "POSTCODE           TEXT    NOT NULL,"
     "COUNTRY            TEXT    NOT NULL);"
 
 
@@ -81,7 +80,7 @@ int main (int argc, char** argv){
     "CREW_NAME      TEXT    NOT NULL,"
     "POSITION       TEXT    NOT NULL);"
     
-    
+
     "CREATE TABLE REPORT ("
     "REPORT_ID          INTEGER     PRIMARY KEY    AUTOINCREMENT,"
     "REPORT_DATE        TEXT                                ,"
