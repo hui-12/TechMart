@@ -10,88 +10,77 @@ int main (int argc, char** argv){
 
     string sql = 
 
-//PRODUCT DATABASE
     "CREATE TABLE PRODUCTS ("
-    "PRODUCT_ID        INT         PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
-    "PRODUCT_NAME      TEXT                                ,"
-    "CATEGORY_ID       ID                                  ,"
-    "DESCRIPTION       TEXT                                ,"
-    "PRODUCT_PRICE     INT                                 ,"
-    "TOTAL_QUANTITY    INT                                 ,"
-    "SUPPLIER_ID       INT                                );"
+    "PRODUCT_ID        INT          PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
+    "CATEGORY_ID       INT          FOREIGN KEY REFERENCES CATEGORIES(CATEGORIES_ID),"
+    "SHOP_ID           TEXT         FOREIGN KEY REFERENCES SHOP(SHOP_ID),"
+    "PRODUCT_NAME      TEXT         NOT NULL,"
+    "PRODUCT_PRICE     INT          NOT NULL,"
+    "TOTAL_SALES       TEXT         ,"
+    "TOTAL_QUANTITY    INT          );"
+
 
     "CREATE TABLE CATEGORIES ("
     "CATEGORY_ID     INT         PRIMARY KEY     NOT NULL       AUTOINCREMENT,"
-    "CATEGORY_NAME   TEXT                               );"
+    "CATEGORY_NAME   TEXT        );"
 
-    "CREATE TABLE SUPPLIER_PROFILE ("
+
+    "CREATE TABLE SUPPLIER ("
     "SUPPLIER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
-    "COMPANY_NAME       TEXT                                ,"
-    "EMAIL              TEXT                                ,"
-    "PHONE              TEXT                                ,"
-    "ADDRESS            TEXT                                ,"
-    "LOCATION           TEXT                               );"
+    "EMAIL_ID           INT         FOREIGN KEY REFERENCES EMAIL(EMAIL_ID),"
+    "ADDRESS_ID         INT         FOREIGN KEY REFERENCES ADDRESS(ADDRESS_ID),"
+    "COMPANY_NAME       TEXT        NOT NULL,"
+    "PHONE              TEXT        NOT NULL);"
 
-//INVENTORY MANAGEMENT
-    "CREATE TABLE INVENTORIES ("
-    "PRODUCT_ID             INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
-    "PRODUCT_NAME           TEXT                                ,"
-    "QUANTITY_AVAILABLE     INT                                 ,"
-    "UNIT_PRICE             INT                                 ,"
-    "REORDER_THRESHOLD      INT                                 ,"
-    "SUPPLIER_ID            INT                                );"
 
-//CUSTOMER DATABASE
-    "CREATE TABLE CUSTOMER_PROFILE ("
-    "CUSTOMER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
-    "FULL_NAME          TEXT                                ,"      //REAL NAME
-    "EMAIL              TEXT                                ,"
-    "PHONE_NUMBER       TEXT                                ,"
-    "ADDRESS            TEXT                                ,"
-    "USER_NAME          TEXT                                ,"      //ACCOUNT NAME
-    "PASSWORD           TEXT                                ,"
-    "PURCHASE_HISTORY   TEXT                               );"
 
-    "CREATE TABLE CUSTOMER_ORDER ("
-    "ORDER_ID        INT         PRIMARY KEY     NOT NULL       AUTOINCREMENT,"
-    "CUSTOMER_ID     INT                                 ,"
-    "PRODUCT_ID      INT                                 ,"
-    "PRODUCT_NAME    TEXT                                ,"
-    "ORDER_DATE      TEXT                                ,"
-    "TOTAL_AMOUNT    INT                                 ,"
-    "STATUS          TEXT                               );"
+    "CREATE TABLE SHOP ("
+    "SHOP_ID                    INT     PRIMARY KEY     NOT NULL    AUTOINCREMENT,"
+    "ADDRESS_ID                 INT     FOREIGN KEY REFERENCES ADDRESS(ADDRESS_ID),"
+    "PRODUCT_ID                 INT     FOREIGN KEY REFERENCES PRODUCT(PRODUCT_ID),"
+    "SHOP_NAME                  TEXT    NOT NULL,"
+    "SHOP_PRODUCT_QUANTITY      INT     NOT NULL,"
+    "SALES                      INT     NOT NULL);"
 
-//OTHERS
-    "CREATE TABLE LOGIN_USER ("
+
+    "CREATE TABLE RECORD (" //CUSTOMER ORDER
+    "RECORD_ID          INT     PRIMARY KEY    NOT NULL     AUTOINCREMENT,"
+    "PRODUCT_ID         INT     FOREIGN KEY REFERENCES PRODUCT(PRODUCT_ID),"
+    "USER_ID            INT     FOREIGN KEY REFERENCES USER(USER_ID),"
+    "TOTAL_PRICE        INT     NOT NULL,"
+    "PAYMENT_METHOD     TEXT    NOT NULL);"
+
+
+    "CREATE TABLE USER ("
     "USER_ID        INT         PRIMARY KEY     NOT NULL        AUTOINCREMENT,"
-    "USER_NAME      TEXT                                ,"
-    "PASSWORD       TEXT                                ,"
-    "EMAIL          TEXT                               );"
+    "ADDRESS_ID     INT         FOREIGN KEY REFERENCES ADDRESS(ADDRESS_ID),"
+    "EMAIL_ID       INT         FOREIGN KEY REFERENCES EMAIL(EMAIL_ID),"
+    "USER_NAME      TEXT        NOT NULL,"
+    "USER_PW        TEXT        NOT NULL);"
+
 
     "CREATE TABLE ADDRESS ("
-    "ADDRESS_ID         INT         PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
-    "USER_ID            TEXT                                ,"
-    "SUPPLIER_ID        TEXT                                ,"
-    "CITY               TEXT                                ,"
-    "STATE              TEXT                                ,"
-    "POSTCODE           TEXT                                ,"
-    "COUNTRY            TEXT                               );"
+    "ADDRESS_ID         INT     PRIMARY KEY     NOT NULL     AUTOINCREMENT,"
+    "USER_ID            INT     FOREIGN KEY REFERENCES USER(USER_ID),"
+    "SUPPLIER_ID        INT     FOREIGN KEY REFERENCES SUPPLIER(SUPPLIER_ID),"
+    "CITY               TEXT    NOT NULL,"
+    "STATE              TEXT    NOT NULL,"
+    "POSTCODE           TEXT    NOT NULL,"
+    "COUNTRY            TEXT    NOT NULL);"
 
-    "CREATE TABLE SHOP_INFORMATION ("
-    "SHOP_ID            INT         PRIMARY KEY     NOT NULL    AUTOINCREMENT,"
-    "SHOP_NAME          TEXT                                ,"
-    "ADDRESS_ID         TEXT                                ,"
-    "PRODUCT_ID         INT                                 ,"
-    "PRODUCT_NAME       TEXT                                ,"
-    "ORDER_DATE         TEXT                                ,"
-    "TOTAL_AMOUNT       INT                                 ,"
-    "STATUS             TEXT                               );"
 
-    "CREATE TABLE REPORT ("
-    "REPORT_ID          INT         PRIMARY KEY     NOT NULL    AUTOINCREMENT,"
-    "REPORT_DATE        TEXT                                ,"
-    "REPORT_CONTENT     TEXT                                ,"
-    "REPORT_STATUS      TEXT                               ),";
+    "CREATE TABLE EMAIL ("
+    "EMAIL_ID       INT     PRIMARY KEY     AUTOINCREMENT,"
+    "USER_ID        INT     FOREIGN KEY REFERENCES USER(USER_ID),"
+    "SUPPLIER_ID    INT     FOREIGN KEY REFERENCES SUPPLIER(SUPPLIER_ID),"
+    "EMAIL          TEXT    NOT NULL);"
+
+
+    "CREATE TABLE CREW ("
+    "CREW_ID        INT     PRIMARY KEY     AUTO INCREMENT,"
+    "SHOP_ID        INT     FOREIGN KEY REFERENCES SHOP(SHOP_ID),"
+    "CREW_NAME      TEXT    NOT NULL,"
+    "POSITION       TEXT    NOT NULL);"
 
 
     exit = sqlite3_open("TechMart.db", &DB);
