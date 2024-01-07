@@ -88,7 +88,7 @@ int main (int argc, char** argv){
     "REPORT_STATUS      TEXT                               );";
 
 
-    exit = sqlite3_open("TechMart.db", &DB);
+    exit = sqlite3_open("Database.db", &DB);
     char* messageError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
 
