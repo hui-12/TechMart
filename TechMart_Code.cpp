@@ -1,14 +1,29 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Database.h"
+#include "admin.h"
+#include "db_customer.h"
+#include "db_inventory.h"
+#include "db_product.h"
+#include "sqlite3.h"
 
 using namespace std;
 
-int input=0, i=0;       //array for int//
-string id[9],pw[9],email[9]; //array for signup string//
-string l_id,l_pw,l_email;
+static int callback(void* data, int argc, char** argv, char** azColName)
+{
+    int i;
+    fprintf(stderr, "%s: ", (const char*)data);
+  
+    for (i = 0; i < argc; i++) {
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+  
+    printf("\n");
+    return 0;
+}
 
+//int input;
+/*
 //function for login menu
 void loginmenu(){
     cout<<endl<<"========================="<<endl;
@@ -85,90 +100,9 @@ bool login_admin(){
     cout << "Failed! Please try again!"<<endl;
     return false;
 }
-
-void user_page(){
-    USER:
-    cout<<endl;
-    cout<<"========================="<<endl;
-    cout<<"========================="<<endl;
-    cout<<"\tUSER MENU"<<endl<<endl;
-    cout<<"Welcome to TechMart!!!"<<endl<<endl;
-    cout<<"1. Profile"<<endl;
-    cout<<"2. Categories"<<endl;
-    cout<<"3. Search"<<endl;
-    cout<<"4. Price Catalogue"<<endl;
-    cout<<"5. Log out"<<endl;
-    cout<<"Please enter a number (1-5)."<<endl;
-    cout<<"========================="<<endl;
-    cout<<"========================="<<endl;
-    cin >> input;
-
-    switch(input){
-        case 1 :
-
-        break;
-
-        case 2 :
-
-        break;
-
-        case 3 :
-
-        break;
-
-        case 4 :
-
-        break;
-
-        case 5 :
-        cout<<"Thank You!"<<endl;
-
-        break;
-
-        default :
-        cout<<"Invalid number! Please input again.";
-        goto USER;
-    }
-}
-
-void admin_page(){
-    ADMIN:
-    cout<<endl;
-    cout<<"========================="<<endl;
-    cout<<"========================="<<endl;
-    cout<<"\tADMIN MENU"<<endl<<endl;
-    cout<<"Welcome to TechMart!!!"<<endl<<endl;
-    cout<<"1. Shop Location"<<endl;
-    cout<<"2. Modify"<<endl;
-    cout<<"3. Log Out"<<endl;
-    cout<<"Please enter a number (1-3)."<<endl;
-    cout<<"========================="<<endl;
-    cout<<"========================="<<endl;
-    cin >> input;
-
-    switch(input){
-        case 1 :
-
-        break;
-
-        case 2 :
-
-        break;
-
-        case 3 :
-        cout<<"Thank You!"<<endl;
-
-        break;
-
-        default :
-        cout<<"Invalid number! Please input again.";
-        goto ADMIN;
-    }
-
-}
-
+*/
 int main(){
-
+/*
     MENU:loginmenu();
     cin>>input;
     switch(input){
@@ -196,5 +130,9 @@ int main(){
 
     default :
         cout<< "Invalid number! Please try again.";
-    }
+    }*/
+
+    create_db_inventory();
+    create_db_product();
+    create_db_customer();
 }

@@ -18,7 +18,7 @@ int create_db_product(){
     }
 
     std::string sql = "CREATE TABLE PRODUCT("
-    "PRODUCT_ID     INT PRIMARY KEY     NOT NULL, "
+    "PRODUCT_ID     INT PRIMARY KEY     NOT NULL AUTOINCREMENT, "
     "PRODUCT_NAME   TEXT    NOT NULL, "
     "PRICE          DOUBLE  NOT NULL, "
     "SUPPLIER_NAME  TEXT    NOT NULL);";
@@ -41,10 +41,9 @@ int create_db_product(){
 
 
     string sql1 = "CREATE TABLE CATEGORY("
-    "CATEGORY_ID INT PRIMARY KEY     NOT NULL, "
+    "CATEGORY_ID INT PRIMARY KEY     NOT NULL AUTOINCREMENT, "
     "CATEGORY_NAME           TEXT    NOT NULL);";
 
-    char* messaggeError;    
     
     exit = sqlite3_exec(DB, sql1.c_str(), NULL, 0, &messaggeError);      
     
@@ -61,11 +60,10 @@ int create_db_product(){
     }
 
     std::string sql2 = "CREATE TABLE SUPPLIER("
-    "SUPPLIER_ID INT PRIMARY KEY     NOT NULL, "
+    "SUPPLIER_ID INT PRIMARY KEY     NOT NULL AUTOINCREMENT, "
     "SUPPLIER_NAME           TEXT    NOT NULL, "
     "EMAIL          TEXT     NOT NULL);";
 
-    char* messaggeError;    
     
     exit = sqlite3_exec(DB, sql2.c_str(), NULL, 0, &messaggeError);      
     

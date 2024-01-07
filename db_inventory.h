@@ -42,7 +42,6 @@ int create_db_inventory(){
     "PRODUCT_NAME   TEXT    NOT NULL, "
     "QUANTITY       INT     NOT NULL);";
 
-    char* messaggeError;    
     
     exit = sqlite3_exec(DB, sql1.c_str(), NULL, 0, &messaggeError);      
     
@@ -62,7 +61,6 @@ int create_db_inventory(){
     "PRODUCT_NAME   TEXT    NOT NULL, "
     "QUANTITY       INT     NOT NULL);";
 
-    char* messaggeError;    
     
     exit = sqlite3_exec(DB, sql2.c_str(), NULL, 0, &messaggeError);      
     
