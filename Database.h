@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main (int argc, char** argv){
+int dara (){
     sqlite3* DB;
     int exit = 0;
 

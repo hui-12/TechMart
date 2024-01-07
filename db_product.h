@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "sqlite3.h"
 
 using namespace std;
@@ -6,77 +7,34 @@ using namespace std;
 int create_db_product(){
     sqlite3* DB;
     int exit = 0;
-    exit = sqlite3_open("db_product.db", &DB);
-  
-    if (exit) {
-        std::cerr << "Error open DB " << sqlite3_errmsg(DB) << std::endl;         return (-1);
-    }
-    else{
-    std::cout << "Opened Database Successfully!" << std::endl;     sqlite3_close(DB);     
 
-    return (0);
-    }
-
-    std::string sql = "CREATE TABLE PRODUCT("
-    "PRODUCT_ID     INT PRIMARY KEY     NOT NULL AUTOINCREMENT, "
+    string sql = 
+    "CREATE TABLE PRODUCT("
+    "PRODUCT_ID     INTEGER PRIMARY KEY    AUTOINCREMENT , "
     "PRODUCT_NAME   TEXT    NOT NULL, "
     "PRICE          DOUBLE  NOT NULL, "
-    "SUPPLIER_NAME  TEXT    NOT NULL);";
+    "SUPPLIER_NAME  TEXT    NOT NULL);"
 
-    char* messaggeError;    
-    
-    exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);      
-    
-    if (exit != SQLITE_OK) {       
-    cerr << "Error Create Table" << std::endl;        
-    sqlite3_free(messaggeError);    
-    }    
-    
-    else{        
-    std::cout << "Table created Successfully" << std::endl;    
-    sqlite3_close(DB);    
-    
-    return (0); 
-    }
+    "CREATE TABLE CATEGORY("
+    "CATEGORY_ID INTEGER PRIMARY KEY     AUTOINCREMENT , "
+    "CATEGORY_NAME           TEXT    NOT NULL);"
 
-
-    string sql1 = "CREATE TABLE CATEGORY("
-    "CATEGORY_ID INT PRIMARY KEY     NOT NULL AUTOINCREMENT, "
-    "CATEGORY_NAME           TEXT    NOT NULL);";
-
-    
-    exit = sqlite3_exec(DB, sql1.c_str(), NULL, 0, &messaggeError);      
-    
-    if (exit != SQLITE_OK) {       
-    std::cerr << "Error Create Table" << std::endl;        
-    sqlite3_free(messaggeError);    
-    }    
-    
-    else{        
-    std::cout << "Table created Successfully" << std::endl;    
-    sqlite3_close(DB);    
-    
-    return (0); 
-    }
-
-    std::string sql2 = "CREATE TABLE SUPPLIER("
-    "SUPPLIER_ID INT PRIMARY KEY     NOT NULL AUTOINCREMENT, "
+    "CREATE TABLE SUPPLIER("
+    "SUPPLIER_ID INTEGER PRIMARY KEY    AUTOINCREMENT , "
     "SUPPLIER_NAME           TEXT    NOT NULL, "
     "EMAIL          TEXT     NOT NULL);";
 
-    
-    exit = sqlite3_exec(DB, sql2.c_str(), NULL, 0, &messaggeError);      
-    
-    if (exit != SQLITE_OK) {       
-    std::cerr << "Error Create Table" << std::endl;        
-    sqlite3_free(messaggeError);    
-    }    
-    
-    else{        
-    std::cout << "Table created Successfully" << std::endl;    
-    sqlite3_close(DB);    
-    
-    return (0); 
+    exit = sqlite3_open("db_product.db", &DB);
+    char* messageError;
+    exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
+
+    if (exit != SQLITE_OK){
+        cerr << "Error Create Database, " << sqlite3_errmsg(DB) << endl;
+        return (-1);
+    } else {
+    cout << "Database Create Successfully, " << endl;
+    sqlite3_close(DB);
+    return (0);
     }
 }
 

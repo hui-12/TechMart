@@ -1,11 +1,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include "admin.h"
 #include "db_customer.h"
 #include "db_inventory.h"
 #include "db_product.h"
 #include "sqlite3.h"
+#include "Database.h"
 
 using namespace std;
 
@@ -21,9 +23,9 @@ static int callback(void* data, int argc, char** argv, char** azColName)
     printf("\n");
     return 0;
 }
-
-//int input;
 /*
+int input;
+
 //function for login menu
 void loginmenu(){
     cout<<endl<<"========================="<<endl;
@@ -40,19 +42,31 @@ void loginmenu(){
 //function for sign up page
 void signup(){
 
+    fstream user;
+    user.open("user",ios::out);
+    if (!user){
+        cout<< "File not created!";
+    }
+    else {
+        cout<< "File  created succesdfully!";
+    }
+
+    string id, pw, email;
+
     cout<<""<<endl;
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
     cout<<"\tSIGNUP"<<endl<<endl;
-    cout<<"User ID : Hello World";
-    cin>> id[i];
+    cout<<"User ID : ";
+    cin>> id;
     cout<<"Password : ";
-    cin>> pw[i];
+    cin>> pw;
     cout<<"Email : ";
-    cin>> email[i];
+    cin>> email;
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
-    i++;
+    
+    
 }
 
 bool login_user(){
@@ -131,8 +145,5 @@ int main(){
     default :
         cout<< "Invalid number! Please try again.";
     }*/
-
-    create_db_inventory();
-    create_db_product();
-    create_db_customer();
+create_db_product();
 }
