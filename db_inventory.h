@@ -12,7 +12,7 @@ int create_db_inventory(){
     "CREATE TABLE SHOP1("
     "SHOP1_PRODUCT_ID   INTEGER PRIMARY KEY AUTOINCREMENT, "
     "PRODUCT_NAME   TEXT    NOT NULL, "
-    "PRODUCT_NAME   TEXT    NOT NULL, "
+    "CATEGORY   TEXT    NOT NULL, "
     "QUANTITY       INT     NOT NULL);"
 
     "CREATE TABLE SHOP2("
@@ -24,7 +24,7 @@ int create_db_inventory(){
     "CREATE TABLE SHOP3("
     "SHOP3_PRODUCT_ID   INTEGER PRIMARY KEY AUTOINCREMENT, "
     "PRODUCT_NAME   TEXT    NOT NULL, "
-    "PRODUCT_NAME   TEXT    NOT NULL, "
+    "CATEGORY   TEXT    NOT NULL, "
     "QUANTITY       INT     NOT NULL);";
 
     exit = sqlite3_open("db_inventory.db", &DB);
