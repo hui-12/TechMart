@@ -163,11 +163,12 @@ bool login_user(){
             return true;
         }
         temp= temp->next;
-    }
     
-    cout << "Failed! Please try again!"<<endl;
     }
+    }
+    cout << "Failed! Please try again!"<<endl;
     return false;
+    
 }
 
 /*string printList(Node* n)
@@ -205,7 +206,8 @@ bool login_admin(){
 
 int main(){
 
-    MENU:loginmenu();
+    MENU:
+    loginmenu();
     cin>>input;
     switch(input){
     case 1 :
@@ -232,6 +234,7 @@ int main(){
 
     default :
         cout<< "Invalid number! Please try again.";
+        goto MENU;
     }
-signup();
+
 }
