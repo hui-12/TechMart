@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include "admin.h"
+#include "user.h"
 #include "db_customer.h"
 #include "db_inventory.h"
 #include "db_product.h"
@@ -10,6 +11,15 @@
 #include "Database.h"
 
 using namespace std;
+
+string temp;
+
+struct Node {
+    string data;
+    struct Node* next;
+};
+
+Node* head=NULL;
 
 static int callback(void* data, int argc, char** argv, char** azColName)
 {
@@ -23,8 +33,16 @@ static int callback(void* data, int argc, char** argv, char** azColName)
     printf("\n");
     return 0;
 }
-/*
-int input;
+
+string printList(Node* n)
+{
+    while (n != NULL) {
+        cout << n->data << " ";
+        temp= n->data;
+        n = n->next;
+    }
+    return 0;
+}
 
 //function for login menu
 void loginmenu(){
@@ -42,9 +60,10 @@ void loginmenu(){
 //function for sign up page
 void signup(){
 
-    fstream user;
-    user.open("user",ios::out);
-    if (!user){
+    ofstream name, password;
+    name.open("name.txt",ios::app);
+    password.open("pw.txt",ios::app);
+if (!name | !password){
         cout<< "File not created!";
     }
     else {
@@ -59,17 +78,50 @@ void signup(){
     cout<<"\tSIGNUP"<<endl<<endl;
     cout<<"User ID : ";
     cin>> id;
+    name<< id<< endl;
     cout<<"Password : ";
     cin>> pw;
+    password<< pw<< endl;
     cout<<"Email : ";
     cin>> email;
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
     
+    name.close();
+    password.close();
     
 }
 
+void push_back(string newElement) {
+  
+  Node* newNode = new Node();
+  
+  newNode->data = newElement;
+  
+  newNode->next = NULL; 
+  
+  if(head == NULL) {
+    head = newNode;
+  } else {
+    Node* temp = head;
+    while(temp->next != NULL)
+      temp = temp->next;
+    
+    temp->next = newNode;
+  }    
+}
+
 bool login_user(){
+
+    ifstream name, password;
+
+    vector <string> temp_name, temp_pw;
+    string l_id, l_pw, id, pw;
+    int i, n=0, p=0;
+
+    head= new Node();
+
+
     cout<<""<<endl;
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
@@ -81,19 +133,55 @@ bool login_user(){
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
 
+    name.open("name.txt",ios::in);
+    
+    for(n=0;n<21;n++){
+        while (getline (name, id)){
+            temp_name.push_back(id);
+        }
+    }
+    /*
+    for (auto i:temp_name){
+        cout<< i << " ";
+    }
+    */   
+
+    password.open("pw.txt",ios::in);
+
+    for(p=0;p<21;p++){
+    while (getline (password, pw)){
+        push_back(pw);
+        }
+    }
+
+    Node* temp = head->next;
     //check login detail
-    for(int j=0;j<i;j++){
-        if(id[j] == l_id && pw[j] == l_pw){
+    while (temp != NULL){
+    for( i=0;i<n;i++){
+        if(temp_name[i] == l_id && temp->data == l_pw){
             cout<< "Login Successful!";
             return true;
         }
-    } 
+        temp= temp->next;
+    }
+    
     cout << "Failed! Please try again!"<<endl;
+    }
     return false;
 }
 
+/*string printList(Node* n)
+{
+    while (n != NULL) {
+        cout << n->data << " ";
+        temp= n->data;
+        n = n->next;
+    }
+    return 0;
+}*/
 bool login_admin(){
     string a_id = "admin",a_pw = "admin";
+    string l_id, l_pw;
 
     cout<<endl;
     cout<<"========================="<<endl;
@@ -114,9 +202,9 @@ bool login_admin(){
     cout << "Failed! Please try again!"<<endl;
     return false;
 }
-*/
+
 int main(){
-/*
+
     MENU:loginmenu();
     cin>>input;
     switch(input){
@@ -144,6 +232,6 @@ int main(){
 
     default :
         cout<< "Invalid number! Please try again.";
-    }*/
-create_db_product();
+    }
+signup();
 }

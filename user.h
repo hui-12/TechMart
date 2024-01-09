@@ -3,9 +3,11 @@
 
 using namespace std;
 
-int input;
 
 void user_page(){
+
+    int input;
+
     USER:
     cout<<endl;
     cout<<"========================="<<endl;
@@ -51,6 +53,8 @@ void user_page(){
 }
 
 void profile(){
+int input;
+
     cout<<endl;
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
