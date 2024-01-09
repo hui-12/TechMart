@@ -122,4 +122,41 @@ int main (int argc,char **argv){
                 "INSERT INTO  \"ORDER\"(PRODUCT_NAME,\"DATE\")"
                 "VALUES ('BLK WIDOW TE CHROMA V2 QUARTZ EDI','20-05-2024');"
                 ;
+
+
+//SALES SHOP 1
+                
+                "INSERT INTO SHOP1S (PRODUCT_NAME,TOTAL_SALES,TIME_PERIOD)"
+                "VALUES ('CORE I5 10500',0,'SPRING');"
+                
+                "INSERT INTO SHOP1S (NAME,PHONE,TIME_PERIOD)"
+                "VALUES ('AORUS PC3333',0,'SPRING');"
+
+                "INSERT INTO SHOP1S (NAME,PHONE,TIME_PERIOD)"
+                "VALUES ('CYNOSA CHROMA MEMBRANE',0,'SPRING');"
+
+
+//SALES SHOP 2
+                
+                "INSERT INTO SHOP2S (PRODUCT_NAME,TOTAL_SALES,TIME_PERIOD)"
+                "VALUES ('CORE I7 10700K',0,'SPRING');"
+                
+                "INSERT INTO SHOP2S (NAME,PHONE,TIME_PERIOD)"
+                "VALUES ('AORUS PC3733',0,'SPRING');"
+
+                "INSERT INTO SHOP2S (NAME,PHONE,TIME_PERIOD)"
+                "VALUES ('BLK WIDOW ULTIMATE 2016',0,'SPRING');"
+
+//SALES SHOP 3       
+                "INSERT INTO SHOP3S (PRODUCT_NAME,TOTAL_SALES,TIME_PERIOD)"
+                "VALUES ('CORE I9 10900X',3,'SPRING');"
+                
+                "INSERT INTO SHOP3S (NAME,PHONE,TIME_PERIOD)"
+                "VALUES ('AORUS PC4400',0,'SPRING');"
+
+                "INSERT INTO SHOPS (NAME,PHONE,TIME_PERIOD)"
+                "VALUES ('BLK WIDOW TE CHROMA V2 QUARTZ EDI',0,'SPRING');"
+                
+                ;
+
 }
