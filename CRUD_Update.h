@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int Delete(){
+int Update(){
     sqlite3* DB;
     int exit = 0;
     char* messageError;
