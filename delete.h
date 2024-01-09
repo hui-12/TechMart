@@ -4,23 +4,23 @@
 
 using namespace std;
 
-void Delete(){
+int Delete(){
     sqlite3* DB;
     int exit = 0;
-
-    string sql = 
-    "DELETE FROM PRODUCT WHERE ID = 1;";
-
-    exit = sqlite3_open("db_product.db", &DB);
     char* messageError;
+
+    string sql = "DELETE FROM PRODUCT WHERE ID = 1;"
+                 "DELETE FROM SHOP2 WHERE ID = 3;"
+                 "DELETE FROM CUSTOMER FROM WHERE ID = 2;";
+
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
 
     if (exit != SQLITE_OK){
-        cerr << "Error Create Database, " << sqlite3_errmsg(DB) << endl;
-        return (-1);
+        cerr << "Error delete product, " << sqlite3_errmsg(DB) << endl;
+        return(-1);
     } else {
-    cout << "Database Create Successfully, " << endl;
+    cout << "Product create successfully, " << endl;
     sqlite3_close(DB);
-    return (0);
+    return(0);
     }
 }

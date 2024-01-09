@@ -62,7 +62,7 @@ int main (int argc,char **argv){
                 "VALUES ('HIHI TECHNOLOGY','HIHITECHNOLOGY@GMAIL.COM');"
                 ;
 
-//INVENTTORY
+//INVENTORY
 //SHOP1
                 "INSERT INTO SHOP1 (PRODUCT_NAME,CATEGORY,QUANTITY)"
                 "VALUES ('CORE I5 10500','PROCESSOR',10);"
@@ -122,8 +122,4 @@ int main (int argc,char **argv){
                 "INSERT INTO  \"ORDER\"(PRODUCT_NAME,\"DATE\")"
                 "VALUES ('BLK WIDOW TE CHROMA V2 QUARTZ EDI','20-05-2024');"
                 ;
-
-
-
-
-    
+}
