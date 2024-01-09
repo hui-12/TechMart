@@ -9,7 +9,9 @@ int Delete(){
     int exit = 0;
     char* messageError;
 
-    string sql = ""
+    string sql = "UPDATE SHOP1 set QUANTITY = 8 where ID = 1"
+                 "UPDATE SHOP2 set QUANTITY = 5 where ID = 2"
+                 "UPDATE SHOP3 set QUANTITY = 9 where ID = 3";
 
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
 
