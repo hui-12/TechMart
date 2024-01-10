@@ -20,6 +20,7 @@ void user_page(){
     3. Price Catalogue
     4. Cart
     5. Log out
+
     Please enter a number (1-5).
     =========================
     =========================
@@ -39,7 +40,29 @@ int input;
     1. Shop Location
     2. Modify
     3. Log Out
+
     Please enter a number (1-3).
+    =========================
+    =========================
+    )";
+    cin >> input;
+
+}
+
+void categories(){
+    int input;
+    
+    cout<< R"(
+    =========================
+    =========================
+    Categories
+
+    1. Processor
+    2. Ram Value
+    3. Keyboard
+    4. Return
+
+    Please enter a number (1-4).
     =========================
     =========================
     )";
