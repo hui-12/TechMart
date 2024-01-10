@@ -21,18 +21,6 @@ struct Node {
 
 Node* head=NULL;
 
-static int callback(void* data, int argc, char** argv, char** azColName)
-{
-    int i;
-    fprintf(stderr, "%s: ", (const char*)data);
-  
-    for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-  
-    printf("\n");
-    return 0;
-}
 
 string printList(Node* n)
 {
@@ -166,6 +154,9 @@ bool login_user(){
     
     }
     }
+    name.close();
+    password.close();
+
     cout << "Failed! Please try again!"<<endl;
     return false;
     
@@ -204,7 +195,11 @@ bool login_admin(){
     return false;
 }
 
+
+
 int main(){
+
+    int choose;
 
     MENU:
     loginmenu();
@@ -218,13 +213,100 @@ int main(){
     
     case 2 :
         if (login_user()){
+            USER:
             user_page();
+            cin >> input;
+            switch(input){
+                case 1 :
+                    profile();
+                    goto USER;
+    
+                case 2 :
+                    /*if (category()){
+                        user_page();
+                        }*/
+                    goto USER;
+
+                case 3 :
+                    /*if (price_catalogue()){
+                        admin_page();
+                        }*/
+                    goto USER;
+
+                case 4 :
+                    //order();
+                    goto USER;
+
+                case 5 :
+                    cout<< "See you again. Bye!";
+                    goto MENU;
+        
+                default :
+                    cout<< "Invalid number! Please try again.";
+                    goto USER;
+
+            }
+            break;
         }
+
         goto MENU;
 
     case 3 :
         if (login_admin()){
+            ADMIN :
             admin_page();
+            cin >> input;
+            switch(input){
+                case 1 :
+                    customer();
+                    goto ADMIN;
+
+                case 2 :
+                    supplier();
+                    goto ADMIN;
+
+                case 3 :
+                    product();
+                    goto ADMIN;
+
+                case 4 :
+                CHOOSE:
+                    select_shop();
+                    cin>> choose;
+                    switch (choose){
+                        case 1 :
+                            shop1();
+                            goto ADMIN;
+
+                        case 2 :
+                            shop2();
+                            goto ADMIN;
+
+                        case 3 :
+                            shop3();
+                            goto ADMIN;
+                            
+                        default:
+                            cout<< "Invalid input, please try again!";
+                            goto CHOOSE;
+                            
+                    }
+                break;
+
+                case 5 :
+
+                break;
+
+                case 6 :
+                    cout<< "Thank You!"<< endl;
+
+                break;
+
+                default :
+                cout<< "Invalid number! Please input again.";
+                goto ADMIN;
+                        }
+                break;
         }
         goto MENU;
 

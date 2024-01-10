@@ -187,7 +187,3 @@ int main (int argc,char **argv){
                 "INSERT INTO TOTAL (NAME,PHONE,TIME_PERIOD)"
                 "VALUES ('BLK WIDOW TE CHROMA V2 QUARTZ EDI',0,'SPRING');";
                 }
-
-                void testing(){
-                    cout<<"testing";
-                }
