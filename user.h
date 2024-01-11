@@ -120,3 +120,69 @@ void productList(){
     cin >> input;
 
 }
+
+void shop1Product(){
+    int input;
+    
+    cout<< R"(
+    =========================
+    =========================
+    Shop 1 - Product
+
+    1. INTEL CORE I5 10500
+    2. AORUS PC3333
+    3. CYNOSA CHROMA MEMBRANE
+
+    4. Return
+
+    Please enter a number (1-4).
+    =========================
+    =========================
+    )";
+    cin >> input;
+
+}
+
+void shop2Product(){
+    int input;
+    
+    cout<< R"(
+    =========================
+    =========================
+    Shop 2 - Product
+
+    1. INTEL CORE I7 10700K
+    2. AORUS PC3733
+    3. BLK WIDOW ULTIMATE 2016
+
+    4. Return
+
+    Please enter a number (1-4).
+    =========================
+    =========================
+    )";
+    cin >> input;
+
+}
+
+void shop3Product(){
+    int input;
+    
+    cout<< R"(
+    =========================
+    =========================
+    Shop 3 - Product
+
+    1. INTEL CORE I9 10900X
+    2. AORUS PC4400
+    3. BLK WIDOW TE VHROMA V2 QUARTZ EDI
+
+    4. Return
+
+    Please enter a number (1-4).
+    =========================
+    =========================
+    )";
+    cin >> input;
+
+}
