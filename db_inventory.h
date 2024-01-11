@@ -25,7 +25,14 @@ int create_db_inventory(){
     "SHOP3_PRODUCT_ID   INTEGER PRIMARY KEY AUTOINCREMENT, "
     "PRODUCT_NAME   TEXT    NOT NULL, "
     "CATEGORY   TEXT    NOT NULL, "
-    "QUANTITY       INT     NOT NULL);";
+    "QUANTITY       INT     NOT NULL);"
+    
+    "CREATE TABLE IF NOT EXISTS TOTAL_SALES("
+    "PRODUCT_ID     INT     NOT NULL,"
+    "PRODUCT_NAME   TEXT    NOT NULL,"
+    "CATEGORY       TEXT    NOT NULL,"
+    "SHOP_NAME      TEXT    NOT NULL,"
+    "TOTAL_SALES    INT     NOT NULL);";
 
     exit = sqlite3_open("db_inventory.db", &DB);
     char* messageError;
