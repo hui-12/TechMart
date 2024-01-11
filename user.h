@@ -186,25 +186,3 @@ void shop3Product(){
     cin >> input;
 
 }
-
-void totalSales(){
-    int input;
-    
-    cout<< R"(
-    =========================
-    =========================
-    Total Sales
-
-    1. Product
-    2. AORUS PC4400
-    3. BLK WIDOW TE VHROMA V2 QUARTZ EDI
-
-    4. Return
-
-    Please enter a number (1-4).
-    =========================
-    =========================
-    )";
-    cin >> input;
-
-}
