@@ -9,7 +9,7 @@
 #include "db_product.h"
 #include "sqlite3.h"
 #include "Database.h"
-
+#include "edit.h"
 using namespace std;
 
 string temp;
@@ -171,6 +171,7 @@ bool login_user(){
     }
     return 0;
 }*/
+
 bool login_admin(){
     string a_id = "admin",a_pw = "admin";
     string l_id, l_pw;
@@ -194,7 +195,6 @@ bool login_admin(){
     cout << "Failed! Please try again!"<<endl;
     return false;
 }
-
 
 
 int main(){
@@ -251,27 +251,29 @@ int main(){
 
         goto MENU;
 
-    case 3 :
+    case 3 : //goto admin page
         if (login_admin()){
             ADMIN :
             admin_page();
             cin >> input;
             switch(input){
-                case 1 :
+                case 1 : // goto customer view
                     customer();
                     goto ADMIN;
 
-                case 2 :
+                case 2 : // goto supplier view
                     supplier();
                     goto ADMIN;
 
-                case 3 :
+                case 3 : // goto product view
                     product();
                     goto ADMIN;
 
-                case 4 :
+                case 4 : // try to see the shop store
                 CHOOSE:
                     select_shop();
+                    cin.clear();
+                    cin.ignore(9999,'\n'); //avoid looping error
                     cin>> choose;
                     switch (choose){
                         case 1 :
@@ -290,14 +292,148 @@ int main(){
                             cout<< "Invalid input, please try again!";
                             goto CHOOSE;
                             
+                        }
+                        break;
+
+                case 5 : // edit page
+                EDITPAGE:
+                    select_edit();
+                    cin>> input;
+                    switch (input){
+                        case 1 : // edit supplier
+                            EDITACTION1 :
+                            edit_action(); // select how to edit
+                            cin>> input;
+                            switch (input){
+                                case 1 : // add function
+                                    add_supplier();
+                                    goto EDITPAGE;
+
+                                case 2 : // update function
+                                    update_supplier();
+                                    goto EDITPAGE;
+
+                                case 3 : // delete function
+                                    delete_supplier();
+                                    goto EDITPAGE;
+
+                                default :
+                                    cout<< "Invalid number! Please input again.";
+                                    goto EDITACTION1;
+                            }
+
+                        case 2 : // edit product
+                            EDITACTION2 :
+                            edit_action(); // select how to edit
+                            cin>> input;
+                            switch (input){
+                                case 1 : // add function
+                                    add_product();
+                                    goto EDITPAGE;
+
+                                case 2 : // update function
+                                    update_product();
+                                    goto EDITPAGE;
+
+                                case 3 : // delete function
+                                    delete_product();
+                                    goto EDITPAGE;
+
+                                default :
+                                    cout<< "Invalid number! Please input again.";
+                                    goto EDITACTION2;
+                            }
+
+                        case 3 : // edit shop
+                            EDITACTION3 :
+                            edit_action(); // select how to edit
+                            cin>> input;
+                            switch (input){
+                                case 1 : // add function
+                                    SELECT1 :
+                                    select_shop(); // select where the shop want edit
+                                    cin>> input;
+                                    switch (input){
+                                        case 1 :
+                                            add_shop(input);
+                                            goto EDITPAGE;
+                                        
+                                        case 2 :
+                                            add_shop(input);
+                                            goto EDITPAGE;
+
+                                        case 3 :
+                                            add_shop(input);
+                                            goto EDITPAGE;
+
+                                        default:
+                                            cout<< "Invalid number! Please input again.";
+                                            goto SELECT1;
+
+                                    }
+
+                                case 2 : // update function
+                                    SELECT2 :
+                                    select_shop(); // select where the shop want edit
+                                    cin>> input;
+                                    switch (input){
+                                        case 1 :
+                                            update_shop(input);
+                                            goto EDITPAGE;
+                                        
+                                        case 2 :
+                                            update_shop(input);
+                                            goto EDITPAGE;
+
+                                        case 3 :
+                                            update_shop(input);
+                                            goto EDITPAGE;
+
+                                        default:
+                                            cout<< "Invalid number! Please input again.";
+                                            goto SELECT2;
+
+                                    }
+
+                                case 3 : // delete function
+                                SELECT3 :
+                                    select_shop(); // select where the shop want edit
+                                    cin>> input;
+                                    switch (input){
+                                        case 1 :
+                                            delete_shop(input);
+                                            goto EDITPAGE;
+                                        
+                                        case 2 :
+                                            delete_shop(input);
+                                            goto EDITPAGE;
+
+                                        case 3 :
+                                            delete_shop(input);
+                                            goto EDITPAGE;
+
+                                        default:
+                                            cout<< "Invalid number! Please input again.";
+                                            goto SELECT3;
+
+                                    }
+
+                                default :
+                                    cout<< "Invalid number! Please input again.";
+                                    goto EDITACTION3;
+
+                            }
+
+                        case 4:
+                            goto ADMIN;
+
+                        default:
+                            goto EDITPAGE;
                     }
-                break;
 
-                case 5 :
+                case 6 : //report function
 
-                break;
-
-                case 6 :
+                case 7 :
                     cout<< "Thank You!"<< endl;
 
                 break;

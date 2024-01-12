@@ -25,12 +25,10 @@ void user_page(){
     =========================
     =========================
     )";
-    cin >> input;
 
 }
 
 void profile(){
-int input;
 
     cout<< R"(
     =========================
@@ -45,12 +43,10 @@ int input;
     =========================
     =========================
     )";
-    cin >> input;
 
 }
 
 void categories(){
-    int input;
     
     cout<< R"(
     =========================
@@ -67,12 +63,10 @@ void categories(){
     =========================
     =========================
     )";
-    cin >> input;
 
 }
 
 void supplierProfile(){
-    int input;
     
     cout<< R"(
     =========================
@@ -89,12 +83,10 @@ void supplierProfile(){
     =========================
     =========================
     )";
-    cin >> input;
 
 }
 
 void productList(){
-    int input;
     
     cout<< R"(
     =========================
@@ -117,12 +109,10 @@ void productList(){
     =========================
     =========================
     )";
-    cin >> input;
 
 }
 
 void shop1Product(){
-    int input;
     
     cout<< R"(
     =========================
@@ -144,7 +134,6 @@ void shop1Product(){
 }
 
 void shop2Product(){
-    int input;
     
     cout<< R"(
     =========================
@@ -161,12 +150,10 @@ void shop2Product(){
     =========================
     =========================
     )";
-    cin >> input;
 
 }
 
 void shop3Product(){
-    int input;
     
     cout<< R"(
     =========================
@@ -183,6 +170,5 @@ void shop3Product(){
     =========================
     =========================
     )";
-    cin >> input;
 
 }

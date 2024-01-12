@@ -171,3 +171,4 @@ sqlite3* DB;
     sqlite3_close(DB);
     return (0);
 }
+
