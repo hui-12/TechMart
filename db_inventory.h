@@ -167,3 +167,42 @@ string sql=     "INSERT INTO SHOP3 (PRODUCT_NAME,CATEGORY,QUANTITY)"
     sqlite3_close(DB);
     return 0;
 }
+
+int insert_data_total_sales(){
+    
+    sqlite3* DB;
+    int exit = 0;
+    exit = sqlite3_open("db_inventory.db", &DB);
+
+    if (exit) {
+        cerr << "Error open DB " << sqlite3_errmsg(DB) << endl;
+        return (-1);
+    }
+    else {
+        cout << "Opened Database Successfully!" << endl;
+    }
+
+string sql=     "INSERT INTO SHOP3 (PRODUCT_NAME,CATEGORY,QUANTITY)"
+                "VALUES ('CORE I9 10900X','PROCESSOR',10);"
+                
+                "INSERT INTO SHOP3 (PRODUCT_NAME,CATEGORY,QUANTITY)"
+                "VALUES ('AORUS PC4400','RAM VALUE',10);"  
+                
+                "INSERT INTO SHOP3 (PRODUCT_NAME,CATEGORY,QUANTITY)"
+                "VALUES ('BLK WIDOW TE CHROMA V2 QUARTZ EDI','KEYBOARD',10);";
+
+    char* messaggeError;
+    exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
+
+    if (exit != SQLITE_OK) {
+        cerr << "Error Insert Data" << endl;
+        sqlite3_free(messaggeError);
+    }
+
+    else {
+        cout << "Data inserted Successfully" << endl;
+    }
+
+    sqlite3_close(DB);
+    return 0;
+}

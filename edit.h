@@ -4,8 +4,6 @@
 
 using namespace std;
 
-int input;
-
 void select_edit(){
     cout<<R"(
 =========================

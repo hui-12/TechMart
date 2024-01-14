@@ -213,6 +213,18 @@ int main(){
     
     case 2 :
         if (login_user()){
+            NEW :
+            cout<< "Are you is a new user?(y/n)";
+            cin>> input;
+            if (input == 'y' || input == 'Y'){
+                new_user();
+            }
+            else if (input == 'n' || input == 'N'){
+                
+            }
+            else{
+                goto NEW;
+            }
             USER:
             user_page();
             cin >> input;

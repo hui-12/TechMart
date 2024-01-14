@@ -3,6 +3,83 @@
 
 using namespace std;
 
+static int callback(void* data, int argc, char** argv, char** azColName)
+{
+    int i;
+    fprintf(stderr, "%s: ", (const char*)data);
+  
+    for (i = 0; i < argc; i++) {
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+  
+    printf("\n");
+    return 0;
+}
+
+class Customer{
+    public:
+        string name , phone;
+
+        Customer(string customerName, string customerPhone)
+        : name(customerName), phone(customerPhone) {}
+
+        void setName(string newname){
+            name = newname;
+        }
+
+        void setPhone(string newphone){
+            phone = newphone;
+        }
+
+        void display() const {
+        cout << "Name: " << name << "\nPhone: " << phone << endl;
+}
+};
+
+void new_user(){
+
+    string name, phone;
+    Customer newuser(name, phone);
+    NEW1 :
+cout<< R"(
+=========================
+=========================
+Information
+
+Please enter your name.
+)";
+getline (cin,name);
+cout<< "Please enter your phone number.";
+getline (cin, phone);
+cout<< "Please confirm your information.(y/n)";
+newuser.display();
+cin>> input;
+if (input == 'y' || input == 'Y'){
+    sqlite3* DB;
+    int exit = 0;
+    exit = sqlite3_open("db_customer.db", &DB);
+
+string sql= "INSERT INTO CUSTOMER (NAME, PHONE, ORDER_HISTORY ) "
+            "VALUES ('"+name+","+phone+"','');";
+
+    char* messaggeError;
+    exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
+
+    if (exit != SQLITE_OK) {
+        cerr << "Error Insert Data" << endl;
+        sqlite3_free(messaggeError);
+    }
+
+    else {
+        cout << "Register Successfully" << endl;
+    }
+
+    sqlite3_close(DB);
+    }
+else{
+    goto NEW1;
+    }
+}
 
 void user_page(){
 
@@ -10,38 +87,35 @@ void user_page(){
 
     USER:
     cout<< R"(
-    =========================
-    =========================
-    USER MENU
+=========================
+=========================
+USER MENU
 
-    Welcome to TechMart!!!
-    1. Profile
-    2. Categories
-    3. Price Catalogue
-    4. Cart
-    5. Log out
-
-    Please enter a number (1-5).
-    =========================
-    =========================
-    )";
+Welcome to TechMart!!!
+1. Profile
+2. Categories
+3. Price Catalogue
+4. Cart
+5. Log out
+-------------------------
+Please enter a number (1-5).
+)";
 
 }
 
 void profile(){
 
     cout<< R"(
-    =========================
-    =========================
-    Profile Page
+=========================
+=========================
+Profile Page
 
-    1. Shop Location
-    2. Modify
-    3. Log Out
+1. Shop Location
+2. Modify
+3. Log Out
+-------------------------
+Please enter a number (1-7).
 
-    Please enter a number (1-3).
-    =========================
-    =========================
     )";
 
 }
@@ -49,19 +123,19 @@ void profile(){
 void categories(){
     
     cout<< R"(
-    =========================
-    =========================
-    Categories
+=========================
+=========================
+Categories
 
-    1. Processor
-    2. Ram Value
-    3. Keyboard
+1. Processor
+2. Ram Value
+3. Keyboard
 
-    4. Return
+4. Return
 
-    Please enter a number (1-4).
-    =========================
-    =========================
+Please enter a number (1-4).
+=========================
+=========================
     )";
 
 }
@@ -69,19 +143,17 @@ void categories(){
 void supplierProfile(){
     
     cout<< R"(
-    =========================
-    =========================
-    Supplier Profile
+=========================
+=========================
+Supplier Profile
 
-    1. XIXI TECHNOLOGY
-    2. HAHA TECHNOLOGY
-    3. HIHI TECHNOLOGY
+1. XIXI TECHNOLOGY
+2. HAHA TECHNOLOGY
+3. HIHI TECHNOLOGY
+4. Back
+-------------------------
+Please enter a number (1-7).
 
-    4. Return
-
-    Please enter a number (1-4).
-    =========================
-    =========================
     )";
 
 }
