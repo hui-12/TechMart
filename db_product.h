@@ -12,6 +12,7 @@ int create_db_product(){
     "CREATE TABLE IF NOT EXISTS PRODUCT("
     "PRODUCT_ID     INTEGER PRIMARY KEY    AUTOINCREMENT , "
     "PRODUCT_NAME   TEXT    NOT NULL, "
+    "CATEGORY       TEXT    NOT NULL, "
     "PRICE          DOUBLE  NOT NULL, "
     "SUPPLIER_NAME  TEXT    NOT NULL);"
 
@@ -149,13 +150,13 @@ int insert_data_category(){
     }
 
 string sql=     "INSERT INTO CATEGORY (CATEGORY_NAME)"
-                "VALUE ('PROCESSOR')"
+                "VALUES ('PROCESSOR');"
 
                 "INSERT INTO CATEGORY (CATEGORY_NAME)"
-                "VALUE ('RAM VALUE')"
+                "VALUES ('RAM VALUE');"
 
                 "INSERT INTO CATEGORY (CATEGORY_NAME)"
-                "VALUE ('KEYBOARD')";
+                "VALUES ('KEYBOARD');";
 
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);

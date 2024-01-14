@@ -35,6 +35,8 @@ Information
 
 Please enter your name.
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 getline (cin,name);
 cout<< "Please enter your phone number.";
 getline (cin, phone);

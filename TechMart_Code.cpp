@@ -229,6 +229,8 @@ int main(){
             }
             USER:
             user_page();
+            cin.clear();
+            cin.ignore(9999,'\n');
             cin >> input;
             switch(input){
                 case 1 :
@@ -324,11 +326,16 @@ int main(){
                                     goto EDITPAGE;
 
                                 case 2 : // update function
+                                    supplier();
                                     update_supplier();
                                     goto EDITPAGE;
 
                                 case 3 : // delete function
+                                    supplier();
                                     delete_supplier();
+                                    goto EDITPAGE;
+
+                                case 4 :
                                     goto EDITPAGE;
 
                                 default :
@@ -346,10 +353,12 @@ int main(){
                                     goto EDITPAGE;
 
                                 case 2 : // update function
+                                    product();
                                     update_product();
                                     goto EDITPAGE;
 
                                 case 3 : // delete function
+                                    product();
                                     delete_product();
                                     goto EDITPAGE;
 
@@ -392,14 +401,17 @@ int main(){
                                     cin>> input;
                                     switch (input){
                                         case 1 :
+                                            shop1();
                                             update_shop(input);
                                             goto EDITPAGE;
                                         
                                         case 2 :
+                                            shop2();
                                             update_shop(input);
                                             goto EDITPAGE;
 
                                         case 3 :
+                                            shop3();
                                             update_shop(input);
                                             goto EDITPAGE;
 
@@ -415,14 +427,17 @@ int main(){
                                     cin>> input;
                                     switch (input){
                                         case 1 :
+                                            shop1();
                                             delete_shop(input);
                                             goto EDITPAGE;
                                         
                                         case 2 :
+                                            shop2();
                                             delete_shop(input);
                                             goto EDITPAGE;
 
                                         case 3 :
+                                            shop3();
                                             delete_shop(input);
                                             goto EDITPAGE;
 
