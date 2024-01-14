@@ -208,8 +208,6 @@ string sql=    "INSERT INTO TOTAL (PRODUCT_NAME,CATEGORY,SHOP_NAME,TOTAL_SALES)"
 
                 "INSERT INTO TOTAL (PRODUCT_NAME,CATEGORY,SHOP_NAME,TOTAL_SALES)"
                 "VALUES ('BLK WIDOW TE CHROMA V2 QUARTZ EDI','KEYBOARD','SHOP 3','0');";
-                }
-
 
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);

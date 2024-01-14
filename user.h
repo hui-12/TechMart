@@ -3,19 +3,6 @@
 
 using namespace std;
 
-static int callback(void* data, int argc, char** argv, char** azColName)
-{
-    int i;
-    fprintf(stderr, "%s: ", (const char*)data);
-  
-    for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-  
-    printf("\n");
-    return 0;
-}
-
 class Customer{
     public:
         string name , phone;
@@ -144,29 +131,15 @@ sqlite3* DB;
 
 
 
-void productList(){
+void product_catalogue(){
     
     cout<< R"(
     =========================
     =========================
     Product List
 
-    1. INTEL CORE I5 10500
-    2. INTEL CORE I7 10700K
-    3. INTEL CORE I9 10900X
-    4. AORUS PC3333
-    5. AORUS PC3733
-    6. AORUS PC4400
-    7. CYNOSA CHROMA MEMBRANE
-    8. BLK WIDOW ULTIMATE 2016
-    9. BLK WIDOW TE VHROMA V2 QUARTZ EDI
+)";
 
-    10. Return
-
-    Please enter a number (1-10).
-    =========================
-    =========================
-    )";
 
 }
 
