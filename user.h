@@ -95,8 +95,9 @@ Welcome to TechMart!!!
 1. Profile
 2. Categories
 3. Price Catalogue
-4. Cart
-5. Log out
+4. Shop
+5. Cart
+6. Log out
 -------------------------
 Please enter a number (1-5).
 )";
@@ -110,13 +111,16 @@ void profile(){
 =========================
 Profile Page
 
-1. Shop Location
-2. Modify
-3. Log Out
--------------------------
-Please enter a number (1-7).
+)";
 
-    )";
+sqlite3* DB;
+    char* messaggeError;
+    int exit = sqlite3_open("db_customer.db", &DB);
+    string query = "SELECT * FROM CUSTOMER WHERE ID='" +to_string(input)+ "'";
+    
+    sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
+
+    sqlite3_close(DB);
 
 }
 
@@ -127,36 +131,18 @@ void categories(){
 =========================
 Categories
 
-1. Processor
-2. Ram Value
-3. Keyboard
-
-4. Return
-
-Please enter a number (1-4).
-=========================
-=========================
-    )";
-
-}
-
-void supplierProfile(){
+)";
+sqlite3* DB;
+    char* messaggeError;
+    int exit = sqlite3_open("db_product.db", &DB);
+    string query = "SELECT * FROM CATEGORY";
     
-    cout<< R"(
-=========================
-=========================
-Supplier Profile
+    sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
 
-1. XIXI TECHNOLOGY
-2. HAHA TECHNOLOGY
-3. HIHI TECHNOLOGY
-4. Back
--------------------------
-Please enter a number (1-7).
-
-    )";
-
+    sqlite3_close(DB);
 }
+
+
 
 void productList(){
     

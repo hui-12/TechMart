@@ -220,10 +220,10 @@ int main(){
                 new_user();
             }
             else if (input == 'n' || input == 'N'){
-                
+
             }
             else{
-                goto NEW;
+                
             }
             USER:
             user_page();
