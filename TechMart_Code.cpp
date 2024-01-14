@@ -215,6 +215,8 @@ int main(){
         if (login_user()){
             NEW :
             cout<< "Are you is a new user?(y/n)";
+            cin.clear();
+            cin.ignore(9999,'\n');
             cin>> input;
             if (input == 'y' || input == 'Y'){
                 new_user();

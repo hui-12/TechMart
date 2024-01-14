@@ -45,6 +45,8 @@ Add Supplier
 
 Please enter supplier name:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 getline (cin,supplier_name);
 cout<< "Please enter supplier email:";
 getline (cin, supplier_email);
@@ -83,6 +85,8 @@ Add Product
 
 Please enter product name:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 getline (cin,product_name);
 cout<< "Please enter price:";
 cin>> price;
@@ -126,6 +130,8 @@ Add Shop Item
 
 Please enter product name:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 getline (cin,product_name);
 cout<< "Please enter category:";
 getline (cin, category);
@@ -248,6 +254,8 @@ Edit Supplier Detail
 
 Please enter supplier ID:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 cin>> input;
 cout<< "Please enter supplier name";
 getline (cin,supplier_name);
@@ -288,6 +296,8 @@ Edit Product Detail
 
 Please enter product ID:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 cin>> input;
 cout<< "Please enter product name";
 getline (cin,product_name);
@@ -373,6 +383,8 @@ Delete Supplier
 
 Please enter supplier ID:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 cin>> input;
 
     sqlite3* DB;
@@ -408,6 +420,8 @@ Delete Product
 
 Please enter product ID:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 cin>> input;
 
     sqlite3* DB;
@@ -443,6 +457,8 @@ Delete Shop Item
 
 Please enter product ID:
 )";
+cin.clear();
+cin.ignore(9999,'\n');
 cin>> input;
 
     sqlite3* DB;
