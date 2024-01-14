@@ -139,7 +139,7 @@ static int shop2(){
     
 =========================
 =========================
-Shop 1 Information
+Shop 2 Information
 
 )";
 sqlite3* DB;
@@ -158,7 +158,7 @@ static int shop3(){
     
 =========================
 =========================
-Shop 1 Information
+Shop 3 Information
 
 )";
 sqlite3* DB;
