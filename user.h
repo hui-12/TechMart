@@ -23,7 +23,7 @@ class Customer{
 }
 };
 
-void new_user(){
+int new_user(){
 
     string name, phone;
     Customer newuser(name, phone);
@@ -49,10 +49,12 @@ if (input == 'y' || input == 'Y'){
     exit = sqlite3_open("db_customer.db", &DB);
 
 string sql= "INSERT INTO CUSTOMER (NAME, PHONE, ORDER_HISTORY ) "
-            "VALUES ('"+name+","+phone+"','');";
+            "VALUES ('"+name+"','"+phone+"','');";
 
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
+
+    int id = sqlite3_last_insert_rowid(DB);
 
     if (exit != SQLITE_OK) {
         cerr << "Error Insert Data" << endl;
@@ -64,6 +66,7 @@ string sql= "INSERT INTO CUSTOMER (NAME, PHONE, ORDER_HISTORY ) "
     }
 
     sqlite3_close(DB);
+    return id;
     }
 else{
     goto NEW1;
@@ -85,15 +88,26 @@ Welcome to TechMart!!!
 2. Categories
 3. Price Catalogue
 4. Shop
-5. Cart
+5. Order
 6. Log out
 -------------------------
-Please enter a number (1-5).
+Please enter a number (1-6).
 )";
 
 }
 
-void profile(){
+void select_id(){
+    sqlite3* DB;
+    char* messaggeError;
+    int exit = sqlite3_open("db_customer.db", &DB);
+    string query = "SELECT * FROM CUSTOMER ";
+    
+    sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
+
+    sqlite3_close(DB);
+}
+
+void profile(int id){
 
     cout<< R"(
 =========================
@@ -105,7 +119,7 @@ Profile Page
 sqlite3* DB;
     char* messaggeError;
     int exit = sqlite3_open("db_customer.db", &DB);
-    string query = "SELECT * FROM CUSTOMER WHERE ID='" +to_string(input)+ "'";
+    string query = "SELECT * FROM CUSTOMER WHERE ID='" +to_string(id)+ "'";
     
     sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
 
@@ -113,7 +127,7 @@ sqlite3* DB;
 
 }
 
-void categories(){
+void category(){
     
     cout<< R"(
 =========================
@@ -132,8 +146,7 @@ sqlite3* DB;
 }
 
 
-
-void product_catalogue(){
+void price_catalogue(){
     
     cout<< R"(
     =========================
@@ -141,67 +154,127 @@ void product_catalogue(){
     Product List
 
 )";
+sqlite3* DB;
+    char* messaggeError;
+    int exit = sqlite3_open("db_product.db", &DB);
+    string query = "SELECT * FROM PRODUCT";
+    
+    sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
 
-
+    sqlite3_close(DB);
 }
 
-void shop1Product(){
+void shopProduct(int shop){
     
     cout<< R"(
-    =========================
-    =========================
-    Shop 1 - Product
-
-    1. INTEL CORE I5 10500
-    2. AORUS PC3333
-    3. CYNOSA CHROMA MEMBRANE
-
-    4. Return
-
-    Please enter a number (1-4).
-    =========================
-    =========================
-    )";
-    cin >> input;
-
-}
-
-void shop2Product(){
+=========================
+=========================
+)";
+cout<< "Shop"<<shop<<" Product"<<endl;
+sqlite3* DB;
+    char* messaggeError;
+    int exit = sqlite3_open("db_inventory.db", &DB);
+    string query = "SELECT * FROM SHOP"+to_string(shop)+"";
     
-    cout<< R"(
-    =========================
-    =========================
-    Shop 2 - Product
+    sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
 
-    1. INTEL CORE I7 10700K
-    2. AORUS PC3733
-    3. BLK WIDOW ULTIMATE 2016
-
-    4. Return
-
-    Please enter a number (1-4).
-    =========================
-    =========================
-    )";
-
+    sqlite3_close(DB);
 }
 
-void shop3Product(){
+void categoryProduct(int cate){
+
+sqlite3* DB;
+    char* messaggeError;
+    int exit = sqlite3_open("db_product.db", &DB);
+
+    string select = "SELECT * FROM CATEGOTY WHERE CATEGORY_ID = '"+to_string(cate)+"'";
+
+cout<< R"(
+=========================
+=========================
+Product
+
+)";
+sqlite3_exec(DB, select.c_str(), callback, NULL, NULL);
+
+    sqlite3_close(DB);
+}
+
+void insert_order(int id) {
+    int select;
+    string date;
+
+    cout << "Please enter product id:";
+    cin.clear();
+    cin.ignore(9999, '\n');
+    cin >> select;
+    cout << "Please enter the date:";
+    cin.clear();
+    cin.ignore(9999, '\n');
+    getline(cin, date);
+
+    sqlite3* DB_c;
+    sqlite3* DB_i;
+
+    int exit_c = sqlite3_open("db_customer.db", &DB_c);
+    int exit_i = sqlite3_open("db_inventory.db", &DB_i);
+
+
+    string product_name_query = "SELECT PRODUCT_NAME, SHOP FROM PRODUCT WHERE PRODUCT_ID = " + to_string(select) + ";";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(DB_c, product_name_query.c_str(), -1, &stmt, NULL) == SQLITE_OK) {
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            string product_name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+            string shop_name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
+
+            // Update the quantity
+            string update_product_query = "UPDATE "+shop_name+" SET QUANTITY = QUANTITY - 1 WHERE PRODUCT_NAME = '" + product_name + ";";
+            sqlite3_exec(DB_i, update_product_query.c_str(), NULL, 0, NULL);
+
+            // Insert into the ORDER table
+            string insert_order_query = "INSERT INTO \"ORDER\" (USER_ID, PRODUCT_NAME, \"DATE\") "
+                                        "VALUES ('" + to_string(id) + "', '" + product_name + "', '" + date + "');";
+            sqlite3_exec(DB_c, insert_order_query.c_str(), NULL, 0, NULL);
+
+            cout << "Product added successfully" << endl;
+        } else {
+            cerr << "Product not found" << endl;
+        }
+
+        sqlite3_finalize(stmt);
+    } else {
+        cerr << "Error preparing statement" << endl;
+    }
+
+    sqlite3_close(DB_c);
+    sqlite3_close(DB_i);
+}
+
+void cart(int id){
     
-    cout<< R"(
-    =========================
-    =========================
-    Shop 3 - Product
+    cout<<R"(
+=========================
+=========================
+Order
 
-    1. INTEL CORE I9 10900X
-    2. AORUS PC4400
-    3. BLK WIDOW TE VHROMA V2 QUARTZ EDI
+)";
 
-    4. Return
+    sqlite3* DB;
+    char* messaggeError;
+    int exit = sqlite3_open("db_customer.db", &DB);
 
-    Please enter a number (1-4).
-    =========================
-    =========================
-    )";
+    string query = "SELECT * FROM \"ORDER\" WHERE USER_ID = " + to_string(id) + ";";
+    
+    sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
+
+    sqlite3_close(DB);
 
 }
+/*void check(){
+    for (int id=0;id<?;id++){
+    if (int input!= to_string(input)){
+        cout<< "no id";
+    }
+    }
+}*/

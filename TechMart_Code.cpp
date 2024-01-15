@@ -199,7 +199,7 @@ bool login_admin(){
 
 int main(){
 
-    int choose;
+    int choose, id, select;
 
     MENU:
     loginmenu();
@@ -220,12 +220,17 @@ int main(){
             cin>> input;
             if (input == 'y' || input == 'Y'){
                 new_user();
+                
             }
             else if (input == 'n' || input == 'N'){
-
+                select_id();
+                cin.clear();
+                cin.ignore(9999,'\n');
+                cin>> id;
             }
             else{
-                
+                cout<<"Invalid input, please try again";
+                goto NEW;
             }
             USER:
             user_page();
@@ -234,26 +239,84 @@ int main(){
             cin >> input;
             switch(input){
                 case 1 :
-                    profile();
+                    profile(id);
                     goto USER;
     
                 case 2 :
-                    /*if (category()){
-                        user_page();
-                        }*/
-                    goto USER;
+                CATEGORY :
+                    category();
+                    cout<< "Please enter a number:";
+                    cin.clear();
+                    cin.ignore(9999,'\n');
+                    cin>> input;
+                    categoryProduct(input);
+                    insert_order(id);
+                    CONFIRM :
+                    cout<< "Are you want to continue?(y/n)";
+                    cin.clear();
+                    cin.ignore(9999,'\n');
+                    cin>> input;
+                    if (input == 'y' || input == 'Y'){
+                        goto CATEGORY;
+                    }
+                    else if (input == 'n' || input == 'N'){
+                        goto USER;
+                    }
+                    else{
+                        cout<< "Invalid input, please try again.";
+                        goto CONFIRM;
+                    }
 
                 case 3 :
-                    /*if (price_catalogue()){
-                        admin_page();
-                        }*/
+                    CATALOGUE :
+                    price_catalogue();
+                    insert_order(id);
+                    CONFIRM1 :
+                    cout<< "Are you want to continue?(y/n)";
+                    cin.clear();
+                    cin.ignore(9999,'\n');
+                    cin>> input;
+                    if (input == 'y' || input == 'Y'){
+                        goto CATALOGUE;
+                    }
+                    else if (input == 'n' || input == 'N'){
+                        goto USER;
+                    }
+                    else{
+                        cout<< "Invalid input, please try again.";
+                        goto CONFIRM1;
+                    }
                     goto USER;
 
                 case 4 :
-                    //order();
+                    select_shop();
+                    cin.clear();
+                    cin.ignore(9999,'\n');
+                    cin>> input;
+                    shopProduct(input);
+                    insert_order(id);
+                    CONFIRM2 :
+                    cout<< "Are you want to continue?(y/n)";
+                    cin.clear();
+                    cin.ignore(9999,'\n');
+                    cin>> input;
+                    if (input == 'y' || input == 'Y'){
+                        goto CATALOGUE;
+                    }
+                    else if (input == 'n' || input == 'N'){
+                        goto USER;
+                    }
+                    else{
+                        cout<< "Invalid input, please try again.";
+                        goto CONFIRM2;
+                    }
                     goto USER;
 
                 case 5 :
+                    cart(id);
+                    goto USER;
+
+                case 6 :
                     cout<< "See you again. Bye!";
                     goto MENU;
         

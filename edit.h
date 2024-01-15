@@ -354,7 +354,7 @@ Please enter product ID:
 cin.clear();
 cin.ignore(9999,'\n');
 cin>> input;
-cout<< "Please enter product name";
+cout<< "Please enter product name: ";
 getline (cin,product_name);
 cin.clear();
 cin.ignore(9999,'\n');
