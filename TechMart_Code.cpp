@@ -366,6 +366,9 @@ int main(){
                         case 3 :
                             shop3();
                             goto ADMIN;
+
+                        case 4 :
+                            goto ADMIN;
                             
                         default:
                             cout<< "Invalid input, please try again!";
