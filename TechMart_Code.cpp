@@ -38,7 +38,7 @@ void loginmenu(){
     cout<<"========================="<<endl;
     cout<<"\tTECHMART"<<endl<<endl;
     cout<<"1. Sign up"<<endl;
-    cout<<"2. Login User"<<endl;
+    cout<<"2. Login User (mark)"<<endl;
     cout<<"3. Login Admin"<<endl;
     cout<<"4. Exit"<<endl<<endl;
     cout<<"========================="<<endl;
@@ -200,6 +200,7 @@ bool login_admin(){
 int main(){
 
     int choose, id, select;
+    char user;
 
     MENU:
     loginmenu();
@@ -214,15 +215,16 @@ int main(){
     case 2 :
         if (login_user()){
             NEW :
-            cout<< "Are you is a new user?(y/n)";
+            cout<< "test";
+            cout<< endl<<"Are you is a new user?(y/n)";
             cin.clear();
             cin.ignore(9999,'\n');
-            cin>> input;
-            if (input == 'y' || input == 'Y'){
+            cin>> user;
+            if (user == 'y' || user == 'Y'){
                 new_user();
                 
             }
-            else if (input == 'n' || input == 'N'){
+            else if ( user == 'n' || user == 'N'){
                 select_id();
                 cin.clear();
                 cin.ignore(9999,'\n');
