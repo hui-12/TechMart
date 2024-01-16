@@ -103,7 +103,6 @@ sqlite3* DB;
 
 void select_shop(){
     cout<< R"(
-
 =========================
 =========================
 Chooese a shop.
@@ -175,3 +174,27 @@ sqlite3* DB;
     return (0);
 }
 
+int report(){
+    cout<< R"(
+=========================
+=========================
+There is the thread of our product.
+
+)";
+
+sqlite3* DB;
+    int exit = sqlite3_open("your_inventory.db", &DB);
+
+    string query = "SELECT MAX(TOTAL_SALES) FROM TOTAL_SALES;";
+
+    char* messageError;
+    exit = sqlite3_exec(DB, query.c_str(), callback, 0, &messageError);
+
+    if (exit != SQLITE_OK) {
+        std::cerr << "Error executing query: " << messageError << std::endl;
+        sqlite3_free(messageError);
+    }
+
+    sqlite3_close(DB);
+
+}

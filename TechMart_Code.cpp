@@ -529,6 +529,8 @@ int main(){
                     }
 
                 case 6 : //report function
+                    report();
+                    goto ADMIN;
 
                 case 7 :
                     cout<< "Thank You!"<< endl;

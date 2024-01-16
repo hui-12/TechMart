@@ -229,8 +229,11 @@ void insert_order(int id) {
             string shop_name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
 
             // Update the quantity
-            string update_product_query = "UPDATE "+shop_name+" SET QUANTITY = QUANTITY - 1 WHERE PRODUCT_NAME = '" + product_name + ";";
-            sqlite3_exec(DB_i, update_product_query.c_str(), NULL, 0, NULL);
+            string update_product_quantity = "UPDATE "+shop_name+" SET QUANTITY = QUANTITY - 1 WHERE PRODUCT_NAME = '" + product_name + ";";
+            sqlite3_exec(DB_i, update_product_quantity.c_str(), NULL, 0, NULL);
+
+            string update_total_sale = "UPDATE TOTAL_SALES SET TOTAL_SALES = TOTAL_SALES + 1 WHERE PRODUCT_NAME = '" + product_name + ";";
+            sqlite3_exec(DB_i, update_total_sale.c_str(), NULL, 0, NULL);
 
             // Insert into the ORDER table
             string insert_order_query = "INSERT INTO \"ORDER\" (USER_ID, PRODUCT_NAME, \"DATE\") "
@@ -271,6 +274,7 @@ Order
     sqlite3_close(DB);
 
 }
+
 /*void check(){
     for (int id=0;id<?;id++){
     if (int input!= to_string(input)){
