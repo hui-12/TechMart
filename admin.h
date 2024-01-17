@@ -174,7 +174,7 @@ sqlite3* DB;
     return (0);
 }
 
-int report(){
+void report(){
     cout<< R"(
 =========================
 =========================
@@ -183,9 +183,9 @@ There is the thread of our product.
 )";
 
 sqlite3* DB;
-    int exit = sqlite3_open("your_inventory.db", &DB);
+    int exit = sqlite3_open("db_inventory.db", &DB);
 
-    string query = "SELECT MAX(TOTAL_SALES) FROM TOTAL_SALES;";
+    string query = "SELECT PRODUCT_ID,PRODUCT_NAME,CATEGORY,SHOP_NAME,MAX(TOTAL_SALES) FROM TOTAL_SALES;";
 
     char* messageError;
     exit = sqlite3_exec(DB, query.c_str(), callback, 0, &messageError);

@@ -26,7 +26,8 @@ class Customer{
 int new_user(){
 
     string name, phone;
-    Customer newuser(name, phone);
+    char input;
+
     NEW1 :
 cout<< R"(
 =========================
@@ -38,9 +39,10 @@ Please enter your name.
 cin.clear();
 cin.ignore(9999,'\n');
 getline (cin,name);
-cout<< "Please enter your phone number.";
+cout<< "Please enter your phone number."<<endl;
 getline (cin, phone);
-cout<< "Please confirm your information.(y/n)";
+cout<< "Please confirm your information.(y/n)"<<endl;
+Customer newuser(name, phone);
 newuser.display();
 cin>> input;
 if (input == 'y' || input == 'Y'){
@@ -48,8 +50,8 @@ if (input == 'y' || input == 'Y'){
     int exit = 0;
     exit = sqlite3_open("db_customer.db", &DB);
 
-string sql= "INSERT INTO CUSTOMER (NAME, PHONE, ORDER_HISTORY ) "
-            "VALUES ('"+name+"','"+phone+"','');";
+string sql= "INSERT INTO CUSTOMER (NAME, PHONE) "
+            "VALUES ('"+name+"','"+phone+"');";
 
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
@@ -115,14 +117,17 @@ void profile(int id){
 Profile Page
 
 )";
-
 sqlite3* DB;
     char* messaggeError;
     int exit = sqlite3_open("db_customer.db", &DB);
-    string query = "SELECT * FROM CUSTOMER WHERE ID='" +to_string(id)+ "'";
+    string query = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID='" +to_string(id)+ "'";
     
     sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
 
+    if (exit != SQLITE_OK) {
+        cerr << "Error executing query" << endl;
+        sqlite3_free(messaggeError);
+    }
     sqlite3_close(DB);
 
 }
@@ -132,7 +137,7 @@ void category(){
     cout<< R"(
 =========================
 =========================
-Categories
+Category
 
 )";
 sqlite3* DB;
@@ -144,7 +149,6 @@ sqlite3* DB;
 
     sqlite3_close(DB);
 }
-
 
 void price_catalogue(){
     
@@ -187,17 +191,26 @@ sqlite3* DB;
     char* messaggeError;
     int exit = sqlite3_open("db_product.db", &DB);
 
-    string select = "SELECT * FROM CATEGOTY WHERE CATEGORY_ID = '"+to_string(cate)+"'";
+    string select = "SELECT CATEGORY_NAME FROM CATEGORY WHERE CATEGORY_ID = "+to_string(cate);
+
+    sqlite3_stmt* stmtCategory;
+    if (sqlite3_prepare_v2(DB, select.c_str(), -1, &stmtCategory, NULL) == SQLITE_OK) {
+        if (sqlite3_step(stmtCategory) == SQLITE_ROW) {
+            string categoryName = reinterpret_cast<const char*>(sqlite3_column_text(stmtCategory, 0));
+
+            string selectProducts = "SELECT * FROM PRODUCT WHERE CATEGORY = '" + categoryName + "'";
 
 cout<< R"(
 =========================
 =========================
-Product
+Product of )"<<categoryName<<R"(
 
 )";
-sqlite3_exec(DB, select.c_str(), callback, NULL, NULL);
+sqlite3_exec(DB, selectProducts.c_str(), callback, NULL, NULL);
 
     sqlite3_close(DB);
+        }
+    }
 }
 
 void insert_order(int id) {
@@ -205,53 +218,66 @@ void insert_order(int id) {
     string date;
 
     cout << "Please enter product id:";
-    cin.clear();
-    cin.ignore(9999, '\n');
     cin >> select;
+    cin.ignore();
     cout << "Please enter the date:";
-    cin.clear();
-    cin.ignore(9999, '\n');
     getline(cin, date);
 
+    char* messageError;
     sqlite3* DB_c;
     sqlite3* DB_i;
+    sqlite3* DB_p;  
 
     int exit_c = sqlite3_open("db_customer.db", &DB_c);
     int exit_i = sqlite3_open("db_inventory.db", &DB_i);
-
+    int exit_p = sqlite3_open("db_product.db", &DB_p); 
 
     string product_name_query = "SELECT PRODUCT_NAME, SHOP FROM PRODUCT WHERE PRODUCT_ID = " + to_string(select) + ";";
 
     sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(DB_c, product_name_query.c_str(), -1, &stmt, NULL) == SQLITE_OK) {
+
+    if (sqlite3_prepare_v2(DB_p, product_name_query.c_str(), -1, &stmt, NULL) == SQLITE_OK) {
         if (sqlite3_step(stmt) == SQLITE_ROW) {
             string product_name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
             string shop_name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
 
             // Update the quantity
-            string update_product_quantity = "UPDATE "+shop_name+" SET QUANTITY = QUANTITY - 1 WHERE PRODUCT_NAME = '" + product_name + ";";
-            sqlite3_exec(DB_i, update_product_quantity.c_str(), NULL, 0, NULL);
+            string update_product_quantity = "UPDATE " + shop_name + " SET QUANTITY = QUANTITY - 1 WHERE PRODUCT_NAME = '" + product_name + "';";
+            if (sqlite3_exec(DB_i, update_product_quantity.c_str(), NULL, 0, &messageError) != SQLITE_OK) {
+                cerr << "Error updating product quantity: " << messageError << endl;
+            }
+            else{
+                                cout<<"update shop";
 
-            string update_total_sale = "UPDATE TOTAL_SALES SET TOTAL_SALES = TOTAL_SALES + 1 WHERE PRODUCT_NAME = '" + product_name + ";";
-            sqlite3_exec(DB_i, update_total_sale.c_str(), NULL, 0, NULL);
+            }
+            string update_total_sale = "UPDATE TOTAL_SALES SET TOTAL_SALES = TOTAL_SALES + 1 WHERE PRODUCT_NAME = '" + product_name + "';";
+            if (sqlite3_exec(DB_i, update_total_sale.c_str(), NULL, 0, &messageError) != SQLITE_OK) {
+                cerr << "Error updating total sales: " << messageError << endl;
+            }
+            else{
+                                cout<<"update shop";
 
+            }
             // Insert into the ORDER table
             string insert_order_query = "INSERT INTO \"ORDER\" (USER_ID, PRODUCT_NAME, \"DATE\") "
                                         "VALUES ('" + to_string(id) + "', '" + product_name + "', '" + date + "');";
-            sqlite3_exec(DB_c, insert_order_query.c_str(), NULL, 0, NULL);
-
-            cout << "Product added successfully" << endl;
+            if (sqlite3_exec(DB_c, insert_order_query.c_str(), NULL, 0, &messageError) != SQLITE_OK) {
+                cerr << "Error inserting order: " << messageError << endl;
+            } else {
+                cout << "Product added successfully" << endl;
+            }
         } else {
             cerr << "Product not found" << endl;
         }
 
         sqlite3_finalize(stmt);
     } else {
-        cerr << "Error preparing statement" << endl;
+        cerr << "Error preparing statement" << sqlite3_errmsg(DB_p) << endl; 
     }
 
     sqlite3_close(DB_c);
     sqlite3_close(DB_i);
+    sqlite3_close(DB_p);
 }
 
 void cart(int id){

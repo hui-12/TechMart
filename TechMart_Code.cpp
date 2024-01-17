@@ -8,7 +8,6 @@
 #include "db_inventory.h"
 #include "db_product.h"
 #include "sqlite3.h"
-#include "Database.h"
 #include "edit.h"
 using namespace std;
 
@@ -38,7 +37,7 @@ void loginmenu(){
     cout<<"========================="<<endl;
     cout<<"\tTECHMART"<<endl<<endl;
     cout<<"1. Sign up"<<endl;
-    cout<<"2. Login User (mark)"<<endl;
+    cout<<"2. Login User "<<endl;
     cout<<"3. Login Admin"<<endl;
     cout<<"4. Exit"<<endl<<endl;
     cout<<"========================="<<endl;
@@ -99,7 +98,7 @@ void push_back(string newElement) {
   }    
 }
 
-bool login_user(){
+int login_user(){
 
     ifstream name, password;
 
@@ -109,7 +108,7 @@ bool login_user(){
 
     head= new Node();
 
-
+    LOGIN :
     cout<<""<<endl;
     cout<<"========================="<<endl;
     cout<<"========================="<<endl;
@@ -148,17 +147,16 @@ bool login_user(){
     for( i=0;i<n;i++){
         if(temp_name[i] == l_id && temp->data == l_pw){
             cout<< "Login Successful!";
-            return true;
+            return 0;
         }
-        temp= temp->next;
-    
     }
+        temp= temp->next;
     }
     name.close();
     password.close();
 
     cout << "Failed! Please try again!"<<endl;
-    return false;
+    goto LOGIN;
     
 }
 
@@ -201,6 +199,18 @@ int main(){
 
     int choose, id, select;
     char user;
+/*
+    create_db_customer();
+    create_db_inventory();
+    create_db_product();
+    insert_data_category();
+    insert_data_product();
+    insert_data_shop1();
+    insert_data_shop2();
+    insert_data_shop3();
+    insert_data_total_sales();
+    insert_data_supplier();
+*/
 
     MENU:
     loginmenu();
@@ -213,10 +223,9 @@ int main(){
         break;
     
     case 2 :
-        if (login_user()){
+            login_user();
             NEW :
-            cout<< "test";
-            cout<< endl<<"Are you is a new user?(y/n)";
+            cout<< endl<<"Are you is a new user?(y/n)"<<endl;
             cin.clear();
             cin.ignore(9999,'\n');
             cin>> user;
@@ -226,6 +235,7 @@ int main(){
             }
             else if ( user == 'n' || user == 'N'){
                 select_id();
+                cout<< "Please select your ID."<<endl;
                 cin.clear();
                 cin.ignore(9999,'\n');
                 cin>> id;
@@ -254,18 +264,18 @@ int main(){
                     categoryProduct(input);
                     insert_order(id);
                     CONFIRM :
-                    cout<< "Are you want to continue?(y/n)";
-                    cin.clear();
-                    cin.ignore(9999,'\n');
-                    cin>> input;
-                    if (input == 'y' || input == 'Y'){
+                    cout<< "Are you want to continue?(y/n)"<<endl;
+                    cin>> user;
+                    if (user == 'y' || user == 'Y'){
                         goto CATEGORY;
                     }
-                    else if (input == 'n' || input == 'N'){
+                    else if (user == 'n' || user == 'N'){
                         goto USER;
                     }
                     else{
-                        cout<< "Invalid input, please try again.";
+                        cout<< "Invalid input, please try again."<<endl;
+                        cin.clear();
+                        cin.ignore(9999,'\n');
                         goto CONFIRM;
                     }
 
@@ -274,14 +284,12 @@ int main(){
                     price_catalogue();
                     insert_order(id);
                     CONFIRM1 :
-                    cout<< "Are you want to continue?(y/n)";
-                    cin.clear();
-                    cin.ignore(9999,'\n');
-                    cin>> input;
-                    if (input == 'y' || input == 'Y'){
+                    cout<< "Are you want to continue?(y/n)"<<endl;
+                    cin>> user;
+                    if (user == 'y' || user == 'Y'){
                         goto CATALOGUE;
                     }
-                    else if (input == 'n' || input == 'N'){
+                    else if (user == 'n' || user == 'N'){
                         goto USER;
                     }
                     else{
@@ -298,14 +306,12 @@ int main(){
                     shopProduct(input);
                     insert_order(id);
                     CONFIRM2 :
-                    cout<< "Are you want to continue?(y/n)";
-                    cin.clear();
-                    cin.ignore(9999,'\n');
-                    cin>> input;
-                    if (input == 'y' || input == 'Y'){
+                    cout<< "Are you want to continue?(y/n)"<<endl;
+                    cin>> user;
+                    if (user == 'y' || user == 'Y'){
                         goto CATALOGUE;
                     }
-                    else if (input == 'n' || input == 'N'){
+                    else if (user == 'n' || user == 'N'){
                         goto USER;
                     }
                     else{
@@ -328,8 +334,7 @@ int main(){
 
             }
             break;
-        }
-
+        
         goto MENU;
 
     case 3 : //goto admin page

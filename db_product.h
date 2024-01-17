@@ -17,8 +17,6 @@ int create_db_product(){
     "SHOP           TEXT    NOT NULL, "
     "SUPPLIER_NAME  TEXT    NOT NULL);"
     
-
-
     "CREATE TABLE IF NOT EXISTS CATEGORY("
     "CATEGORY_ID INTEGER PRIMARY KEY     AUTOINCREMENT , "
     "CATEGORY_NAME           TEXT    NOT NULL);"
