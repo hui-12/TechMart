@@ -23,7 +23,7 @@ class Customer{
 }
 };
 
-int new_user(){
+void new_user(){
 
     string name, phone;
     char input;
@@ -66,9 +66,7 @@ string sql= "INSERT INTO CUSTOMER (NAME, PHONE) "
     else {
         cout << "Register Successfully" << endl;
     }
-
     sqlite3_close(DB);
-    return id;
     }
 else{
     goto NEW1;
@@ -255,7 +253,7 @@ void insert_order(int id) {
                 cerr << "Error updating total sales: " << messageError << endl;
             }
             else{
-                                cout<<"update shop";
+                                cout<<"update report";
 
             }
             // Insert into the ORDER table

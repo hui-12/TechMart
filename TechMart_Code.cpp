@@ -102,7 +102,7 @@ int login_user(){
 
     ifstream name, password;
 
-    vector <string> temp_name, temp_pw;
+    vector <string> temp_name;
     string l_id, l_pw, id, pw;
     int i, n=0, p=0;
 
@@ -231,7 +231,11 @@ int main(){
             cin>> user;
             if (user == 'y' || user == 'Y'){
                 new_user();
-                
+                select_id();
+                cout<< "Please select your ID."<<endl;
+                cin.clear();
+                cin.ignore(9999,'\n');
+                cin>> id;
             }
             else if ( user == 'n' || user == 'N'){
                 select_id();
@@ -435,6 +439,9 @@ int main(){
                                     delete_product();
                                     goto EDITPAGE;
 
+                                case 4 :
+                                    goto EDITPAGE;
+
                                 default :
                                     cout<< "Invalid number! Please input again.";
                                     goto EDITACTION2;
@@ -462,6 +469,8 @@ int main(){
                                             add_shop(input);
                                             goto EDITPAGE;
 
+                                        case 4 :
+                                            goto EDITPAGE;
                                         default:
                                             cout<< "Invalid number! Please input again.";
                                             goto SELECT1;
@@ -514,6 +523,9 @@ int main(){
                                             delete_shop(input);
                                             goto EDITPAGE;
 
+                                        case 4 :
+                                            goto EDITPAGE;
+
                                         default:
                                             cout<< "Invalid number! Please input again.";
                                             goto SELECT3;
@@ -539,6 +551,7 @@ int main(){
 
                 case 7 :
                     cout<< "Thank You!"<< endl;
+                    goto MENU;
 
                 break;
 

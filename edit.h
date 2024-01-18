@@ -76,7 +76,7 @@ string sql=     "INSERT INTO SUPPLIER (SUPPLIER_NAME,EMAIL)"
 
 int add_product(){
 
-    string product_name, category, supplier_name;
+    string product_name, category, supplier_name, shop;
     double price;
     
     cout<< R"(
@@ -95,6 +95,8 @@ cin.clear();
 cin.ignore(9999,'\n');
 cout<< "Please enter category:";
 getline (cin, category);
+cout<< "Please enter shop:";
+getline (cin, shop);
 cout<< "Please enter supplier name:";
 getline (cin, supplier_name);
 //cout<< product_name<<" "<<price<<" "<<category<<" "<<supplier_name;
@@ -103,8 +105,8 @@ getline (cin, supplier_name);
     int exit = 0;
     exit = sqlite3_open("db_product.db", &DB);
 
-string sql =    "INSERT INTO PRODUCT (PRODUCT_NAME, PRICE, CATEGORY, SUPPLIER_NAME) "
-                "VALUES ('"+product_name+"',"+to_string(price)+",'"+category+"','"+supplier_name+"');";
+string sql =    "INSERT INTO PRODUCT (PRODUCT_NAME, PRICE, CATEGORY,SHOP, SUPPLIER_NAME) "
+                "VALUES ('"+product_name+"',"+to_string(price)+",'"+category+"','"+shop+"','"+supplier_name+"');";
 
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
@@ -292,7 +294,7 @@ getline (cin, supplier_email);
 
 int update_product(){
 
-    string product_name, category, supplier_name;
+    string product_name, category, supplier_name, shop;
     double price;
     cout<< R"(
 =========================
@@ -314,6 +316,8 @@ cin.clear();
 cin.ignore(9999,'\n');
 cout<< "Please enter product category: ";
 getline (cin, category);
+cout<< "Please enter shop:";
+getline (cin, shop);
 cout<< "Please enter supplier name: ";
 getline (cin, supplier_name);
 
@@ -321,8 +325,8 @@ getline (cin, supplier_name);
     int exit = 0;
     exit = sqlite3_open("db_product.db", &DB);
 
-string sql=     "UPDATE PRODUCT SET PRODUCT_NAME = '"+product_name+"', PRICE = '"+to_string(price)+"', CATEGORY = '"+category+"', SUPPLIER_NAME = '"+supplier_name+"' "
-                "WHERE PRODUCT_ID = '"+to_string(input)+"'";
+string sql=     "UPDATE PRODUCT SET PRODUCT_NAME = '" + product_name + "', PRICE = " + to_string(price) + ", CATEGORY = '" + category + "', SHOP =  '" + shop + "', SUPPLIER_NAME = '" + supplier_name + "' "
+                "WHERE PRODUCT_ID = " + to_string(input);
 
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
